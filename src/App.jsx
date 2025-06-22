@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import About from './components/About';
@@ -22,9 +23,11 @@ function App() {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-    console.log('Theme toggled to', theme === 'dark' ? 'light' : 'dark');
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    console.log('Theme toggled to', newTheme);
   };
+
 
   return (
     <div className="min-h-screen bg-white text-black dark:bg-black dark:text-yellow-400 transition-colors duration-500">
