@@ -1,3 +1,6 @@
+/* eslint-env node */
+/* global Buffer */
+
 // Serverless endpoint for contact form
 // Supports two actions:
 // 1) Append submissions to a Google Sheet when `GOOGLE_SHEET_ID` and `GOOGLE_SERVICE_ACCOUNT` are provided.
@@ -5,8 +8,6 @@
 // If both are configured, the endpoint will try both (sheet append first, then email).
 
 export default async function handler(req, res) {
-
-    console.log('API /send-contact called with method:', req.method);
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST');
         return res.status(405).json({ error: 'Method not allowed' });
@@ -25,8 +26,6 @@ export default async function handler(req, res) {
     let wroteToSheet = false;
     let sentEmail = false;
 
-    console.log('Contact form submission received:', { name, email, message });
-    console.log('Google Sheet_id:', GOOGLE_SHEET_ID ? 'configured' : 'not configured');
 
     // Try to append to Google Sheets if configured
     if (GOOGLE_SHEET_ID && GOOGLE_SERVICE_ACCOUNT) {
@@ -36,12 +35,12 @@ export default async function handler(req, res) {
             let serviceAccount;
             try {
                 serviceAccount = JSON.parse(GOOGLE_SERVICE_ACCOUNT);
-            } catch (e) {
+            } catch (_) {
                 // Try base64 decode
                 try {
                     const decoded = Buffer.from(GOOGLE_SERVICE_ACCOUNT, 'base64').toString('utf8');
                     serviceAccount = JSON.parse(decoded);
-                } catch (err) {
+                } catch (_) {
                     throw new Error('Invalid GOOGLE_SERVICE_ACCOUNT JSON');
                 }
             }
