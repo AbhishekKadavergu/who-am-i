@@ -3,14 +3,37 @@ import React, { useState } from "react";
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || 'Failed to send message');
+      }
+
+      setSubmitted(true);
+      setForm({ name: '', email: '', message: '' });
+    } catch (err) {
+      console.error('Contact send error', err);
+      setError(err.message || 'Failed to send message');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,7 +46,10 @@ const Contact = () => {
           <input name="name" type="text" placeholder="Your Name" value={form.name} onChange={handleChange} required className="w-full px-4 py-2 rounded border border-primary bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary" />
           <input name="email" type="email" placeholder="Your Email" value={form.email} onChange={handleChange} required className="w-full px-4 py-2 rounded border border-primary bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary" />
           <textarea name="message" placeholder="Your Message" value={form.message} onChange={handleChange} required className="w-full px-4 py-2 rounded border border-primary bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary" />
-          <button type="submit" className="w-full py-2 rounded bg-primary text-black font-semibold hover:bg-primary/80 transition-colors duration-200">Send</button>
+          {error && <div className="text-red-600 text-sm font-semibold">{error}</div>}
+          <button type="submit" disabled={loading} className="w-full py-3 px-4 rounded bg-yellow-400 text-black font-bold text-lg hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+            {loading ? 'Sending...' : 'Send Message'}
+          </button>
         </form>
       )}
     </section>

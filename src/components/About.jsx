@@ -4,9 +4,9 @@ const About = () => (
   <section id="about" className="py-12 px-4 md:px-12 bg-gray-50 dark:bg-gray-900 transition-colors duration-500 animate-fade-in">
     {/* Hero Section */}
     <div className="flex flex-col items-center mb-12">
-      <img src="https://avatars.githubusercontent.com/u/9919?v=4" alt="Abhishek Kadavergu" className="w-32 h-32 rounded-full shadow-xl border-4 border-primary mb-4" />
+      <img src="https://avatars.githubusercontent.com/u/59202659?v=4" alt="Abhishek Kadavergu" className="w-32 h-32 rounded-full shadow-xl border-4 border-primary mb-4" />
       <h1 className="text-4xl font-extrabold text-primary mb-2">Abhishek Kadavergu</h1>
-      <p className="text-lg text-gray-800 dark:text-yellow-200 font-medium mb-2">Full-Stack Developer | Cloud Enthusiast | Mentor</p>
+      <p className="text-lg text-gray-800 dark:text-yellow-200 font-medium mb-2">Full-Stack Developer | Node, React, Angular, AWS</p>
       <span className="inline-block bg-primary text-black dark:bg-yellow-400 dark:text-gray-900 px-4 py-1 rounded-full font-semibold shadow-md">Bangalore, India</span>
     </div>
 

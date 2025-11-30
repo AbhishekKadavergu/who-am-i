@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-portfolio" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad-portfolio)"/>
+  
+  <!-- Title -->
+  <text x="600" y="80" font-size="52" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial, sans-serif">Personal Portfolio</text>
+  <text x="600" y="140" font-size="32" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Arial, sans-serif">Full-Stack Project Showcase</text>
+  
+  <!-- Left Panel - Features -->
+  <g>
+    <rect x="50" y="190" width="300" height="300" fill="white" rx="10" opacity="0.98"/>
+    <circle cx="200" cy="240" r="30" fill="#6366f1"/>
+    <text x="200" y="250" font-size="32" text-anchor="middle" fill="white">🎨</text>
+    <text x="200" y="310" font-size="16" font-weight="bold" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Component Design</text>
+    <line x1="70" y1="325" x2="330" y2="325" stroke="#e5e7eb" stroke-width="2"/>
+    <text x="200" y="360" font-size="12" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Reusable React components</text>
+    <text x="200" y="378" font-size="12" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">with proper abstraction</text>
+  </g>
+  
+  <!-- Center Panel - Search & Filter -->
+  <g>
+    <rect x="450" y="190" width="300" height="300" fill="white" rx="10" opacity="0.98"/>
+    <circle cx="600" cy="240" r="30" fill="#6366f1"/>
+    <text x="600" y="250" font-size="32" text-anchor="middle" fill="white">🔍</text>
+    <text x="600" y="310" font-size="16" font-weight="bold" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Smart Search</text>
+    <line x1="470" y1="325" x2="730" y2="325" stroke="#e5e7eb" stroke-width="2"/>
+    <text x="600" y="360" font-size="12" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Full-text search across</text>
+    <text x="600" y="378" font-size="12" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">projects, tags, roles</text>
+  </g>
+  
+  <!-- Right Panel - Responsive -->
+  <g>
+    <rect x="850" y="190" width="300" height="300" fill="white" rx="10" opacity="0.98"/>
+    <circle cx="1000" cy="240" r="30" fill="#6366f1"/>
+    <text x="1000" y="250" font-size="32" text-anchor="middle" fill="white">📱</text>
+    <text x="1000" y="310" font-size="16" font-weight="bold" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Responsive</text>
+    <line x1="870" y1="325" x2="1130" y2="325" stroke="#e5e7eb" stroke-width="2"/>
+    <text x="1000" y="360" font-size="12" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Mobile, tablet &amp;</text>
+    <text x="1000" y="378" font-size="12" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">desktop optimized</text>
+  </g>
+  
+  <!-- Footer Tech Stack -->
+  <text x="600" y="550" font-size="16" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="Arial, sans-serif">React 19 • Vite • Tailwind • Vitest • Node.js • Dark Mode</text>
+</svg>

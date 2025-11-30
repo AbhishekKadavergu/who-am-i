@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-cb" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#be185d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad-cb)"/>
+  <text x="600" y="150" font-size="48" font-weight="bold" text-anchor="middle" fill="white">CB Data Orchestration</text>
+  <text x="600" y="220" font-size="36" text-anchor="middle" fill="rgba(255,255,255,0.9)">Automated Pipeline Service</text>
+  <g opacity="0.3">
+    <circle cx="200" cy="380" r="40" fill="white"/>
+    <circle cx="400" cy="320" r="40" fill="white"/>
+    <circle cx="600" cy="380" r="40" fill="white"/>
+    <circle cx="800" cy="320" r="40" fill="white"/>
+    <circle cx="1000" cy="380" r="40" fill="white"/>
+    <path d="M 240 360 Q 300 340 360 340" stroke="white" stroke-width="2" fill="none"/>
+    <path d="M 440 300 Q 500 340 560 360" stroke="white" stroke-width="2" fill="none"/>
+    <path d="M 640 360 Q 700 340 760 340" stroke="white" stroke-width="2" fill="none"/>
+    <path d="M 840 300 Q 900 340 960 360" stroke="white" stroke-width="2" fill="none"/>
+  </g>
+  <text x="600" y="550" font-size="20" text-anchor="middle" fill="rgba(255,255,255,0.7)">NestJS, OpenShift, SFTP, Hours to Minutes</text>
+</svg>
