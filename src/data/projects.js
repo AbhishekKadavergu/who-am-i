@@ -85,7 +85,7 @@ const projects = [
         tags: ['Angular', 'NestJS', 'PostgreSQL', 'AWS', 'TypeScript', 'RBAC', 'Audit Logging'],
         repo: null,
         demo: null,
-        images: ['/projects/comp.jpg'],
+        images: ['/projects/clinical-ops-portal.svg'],
         featured: true,
         highlights: [
             'Improved workflow efficiency by ~30%',

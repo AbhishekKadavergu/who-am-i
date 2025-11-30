@@ -106,11 +106,20 @@ describe("Projects Component", () => {
 
   it("navigates featured carousel with arrow buttons", async () => {
     render(<Projects />);
-    const arrowButtons = screen.getAllByText("←");
-    expect(arrowButtons.length).toBeGreaterThan(0);
-    fireEvent.click(arrowButtons[0]);
+
+    const prevButton = screen.getByLabelText("Previous featured project");
+    const nextButton = screen.getByLabelText("Next featured project");
+
+    expect(prevButton).toBeInTheDocument();
+    expect(nextButton).toBeInTheDocument();
+
+    fireEvent.click(nextButton);
+
     await waitFor(() => {
-      expect(arrowButtons[0]).toBeInTheDocument();
+      // After we're allowed to click, the button still exists
+      expect(
+        screen.getByLabelText("Next featured project")
+      ).toBeInTheDocument();
     });
   });
 
