@@ -12,10 +12,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "dotenv": "^16.3.1",
     "googleapis": "^131.0.0",
-    "dotenv": "^16.3.1"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
