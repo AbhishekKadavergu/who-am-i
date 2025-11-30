@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Project files
+public/*.docx
+src/data/raw/
+scripts/*

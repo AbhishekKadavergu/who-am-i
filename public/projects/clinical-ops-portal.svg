@@ -1,0 +1,62 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-clinical" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad-clinical)"/>
+  <text x="600" y="80" font-size="52" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial, sans-serif">Clinical Operations Portal</text>
+  <text x="600" y="140" font-size="32" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Arial, sans-serif">Hospital Management System</text>
+  
+  <!-- Patient Registration -->
+  <g>
+    <rect x="70" y="190" width="240" height="300" fill="white" rx="10" opacity="0.98"/>
+    <circle cx="190" cy="250" r="35" fill="#8b5cf6"/>
+    <text x="190" y="265" font-size="40" text-anchor="middle" fill="white">👤</text>
+    <text x="190" y="330" font-size="20" font-weight="bold" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Patient</text>
+    <text x="190" y="360" font-size="16" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif">Registration</text>
+    <line x1="90" y1="375" x2="290" y2="375" stroke="#e5e7eb" stroke-width="2"/>
+    <text x="190" y="410" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Admission &amp;</text>
+    <text x="190" y="435" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Demographics</text>
+  </g>
+  
+  <!-- OPD/IPD -->
+  <g>
+    <rect x="360" y="190" width="240" height="300" fill="white" rx="10" opacity="0.98"/>
+    <circle cx="480" cy="250" r="35" fill="#8b5cf6"/>
+    <text x="480" y="265" font-size="40" text-anchor="middle" fill="white">🏥</text>
+    <text x="480" y="330" font-size="20" font-weight="bold" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">OPD/IPD</text>
+    <text x="480" y="360" font-size="16" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif">Check-in</text>
+    <line x1="380" y1="375" x2="580" y2="375" stroke="#e5e7eb" stroke-width="2"/>
+    <text x="480" y="410" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Outpatient &amp;</text>
+    <text x="480" y="435" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Inpatient Mgmt</text>
+  </g>
+  
+  <!-- Doctor Scheduling -->
+  <g>
+    <rect x="650" y="190" width="240" height="300" fill="white" rx="10" opacity="0.98"/>
+    <circle cx="770" cy="250" r="35" fill="#8b5cf6"/>
+    <text x="770" y="265" font-size="40" text-anchor="middle" fill="white">📅</text>
+    <text x="770" y="330" font-size="20" font-weight="bold" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Doctor</text>
+    <text x="770" y="360" font-size="16" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif">Scheduling</text>
+    <line x1="670" y1="375" x2="870" y2="375" stroke="#e5e7eb" stroke-width="2"/>
+    <text x="770" y="410" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Bed &amp;</text>
+    <text x="770" y="435" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Doctor Assignments</text>
+  </g>
+  
+  <!-- Billing -->
+  <g>
+    <rect x="940" y="190" width="240" height="300" fill="white" rx="10" opacity="0.98"/>
+    <circle cx="1060" cy="250" r="35" fill="#8b5cf6"/>
+    <text x="1060" y="265" font-size="40" text-anchor="middle" fill="white">💳</text>
+    <text x="1060" y="330" font-size="20" font-weight="bold" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Billing</text>
+    <text x="1060" y="360" font-size="16" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif">System</text>
+    <line x1="960" y1="375" x2="1160" y2="375" stroke="#e5e7eb" stroke-width="2"/>
+    <text x="1060" y="410" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Invoices &amp;</text>
+    <text x="1060" y="435" font-size="13" text-anchor="middle" fill="#9ca3af" font-family="Arial, sans-serif">Payments</text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="600" y="570" font-size="18" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="Arial, sans-serif">Angular • NestJS • PostgreSQL • AWS • RBAC</text>
+</svg>

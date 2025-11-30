@@ -1,0 +1,19 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-auth" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad-auth)"/>
+  <text x="600" y="150" font-size="48" font-weight="bold" text-anchor="middle" fill="white">Authentication &amp; RBAC</text>
+  <text x="600" y="220" font-size="36" text-anchor="middle" fill="rgba(255,255,255,0.9)">Centralized Identity Platform</text>
+  <g opacity="0.3">
+    <circle cx="300" cy="350" r="60" fill="white"/>
+    <circle cx="600" cy="350" r="60" fill="white"/>
+    <circle cx="900" cy="350" r="60" fill="white"/>
+    <line x1="360" y1="350" x2="540" y2="350" stroke="white" stroke-width="3"/>
+    <line x1="660" y1="350" x2="840" y2="350" stroke="white" stroke-width="3"/>
+  </g>
+  <text x="600" y="550" font-size="20" text-anchor="middle" fill="rgba(255,255,255,0.7)">NestJS, PostgreSQL, JWT, AWS Lambda</text>
+</svg>

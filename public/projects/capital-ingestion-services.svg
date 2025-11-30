@@ -1,0 +1,25 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-capital" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad-capital)"/>
+  <text x="600" y="150" font-size="48" font-weight="bold" text-anchor="middle" fill="white">Capital Ingestion</text>
+  <text x="600" y="220" font-size="36" text-anchor="middle" fill="rgba(255,255,255,0.9)">Event-Driven Pipeline</text>
+  <g opacity="0.3">
+    <rect x="150" y="300" width="100" height="100" fill="white" rx="4"/>
+    <text x="200" y="355" font-size="12" text-anchor="middle" fill="url(#grad-capital)">SNS</text>
+    <polygon points="300,350 350,330 350,370" fill="white"/>
+    <rect x="400" y="300" width="100" height="100" fill="white" rx="4"/>
+    <text x="450" y="355" font-size="12" text-anchor="middle" fill="url(#grad-capital)">SQS</text>
+    <polygon points="550,350 600,330 600,370" fill="white"/>
+    <rect x="650" y="300" width="100" height="100" fill="white" rx="4"/>
+    <text x="700" y="355" font-size="12" text-anchor="middle" fill="url(#grad-capital)">Lambda</text>
+    <polygon points="800,350 850,330 850,370" fill="white"/>
+    <rect x="900" y="300" width="100" height="100" fill="white" rx="4"/>
+    <text x="950" y="355" font-size="12" text-anchor="middle" fill="url(#grad-capital)">DB</text>
+  </g>
+  <text x="600" y="550" font-size="20" text-anchor="middle" fill="rgba(255,255,255,0.7)">AWS, Event-Driven, 99.9%+ Reliability</text>
+</svg>
