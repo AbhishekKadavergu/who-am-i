@@ -1,12 +1,12 @@
-// src/components/Projects.jsx
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import projectsData from "../data/projects";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import useCarousel from "../hooks/useCarousel";
+import type { Project } from "../data/projects";
 
 // SVG chevrons
-const ChevronLeft = ({ className = "w-4 h-4" }) => (
+const ChevronLeft = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 20 20" fill="none" aria-hidden>
     <path
       d="M12 15l-5-5 5-5"
@@ -17,7 +17,7 @@ const ChevronLeft = ({ className = "w-4 h-4" }) => (
     />
   </svg>
 );
-const ChevronRight = ({ className = "w-4 h-4" }) => (
+const ChevronRight = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 20 20" fill="none" aria-hidden>
     <path
       d="M8 5l5 5-5 5"
@@ -30,13 +30,13 @@ const ChevronRight = ({ className = "w-4 h-4" }) => (
 );
 
 export default function Projects() {
-  const [active, setActive] = useState(null);
-  const [filter, setFilter] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [search, setSearch] = useState("");
-  const [featuredIdxResetKey, setFeaturedIdxResetKey] = useState(0);
+  const [active, setActive] = useState<Project | null>(null);
+  const [filter, setFilter] = useState<string>("All");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
+  const [featuredIdxResetKey, setFeaturedIdxResetKey] = useState<number>(0);
 
-  const featured = projectsData.filter((p) => p.featured);
+  const featured = (projectsData as Project[]).filter((p) => p.featured);
   const carousel = useCarousel({
     length: featured.length,
     autoPlayMs: 6000,
@@ -47,16 +47,19 @@ export default function Projects() {
   useEffect(() => {
     setFeaturedIdxResetKey((k) => k + 1);
     if (carousel.index >= featured.length) carousel.setIndex(0);
-  }, [featured.length]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [featured.length]);
 
   const tags = useMemo(() => {
-    const t = new Set();
-    projectsData.forEach((p) => p.tags?.forEach((tag) => t.add(tag)));
+    const t = new Set<string>();
+    (projectsData as Project[]).forEach((p) =>
+      p.tags?.forEach((tag) => t.add(tag))
+    );
     return ["All", ...Array.from(t)];
   }, []);
 
   const filtered = useMemo(() => {
-    let result = projectsData;
+    let result = projectsData as Project[];
     if (filter !== "All")
       result = result.filter((p) => p.tags?.includes(filter));
     if (search.trim()) {
@@ -64,9 +67,9 @@ export default function Projects() {
       result = result.filter(
         (p) =>
           p.title.toLowerCase().includes(s) ||
-          p.shortDesc.toLowerCase().includes(s) ||
-          p.longDesc.toLowerCase().includes(s) ||
-          p.role.toLowerCase().includes(s) ||
+          (p.shortDesc ?? "").toLowerCase().includes(s) ||
+          (p.longDesc ?? "").toLowerCase().includes(s) ||
+          (p.role ?? "").toLowerCase().includes(s) ||
           p.tags?.some((t) => t.toLowerCase().includes(s))
       );
     }
@@ -85,16 +88,16 @@ export default function Projects() {
     const el = carousel.containerRef?.current;
     if (!el) return;
     const onLeave = () => {
-      const activeEl = document.activeElement;
+      const activeEl = document.activeElement as HTMLElement | null;
       if (activeEl && el.contains(activeEl)) {
         activeEl.blur();
       }
     };
     el.addEventListener("mouseleave", onLeave);
     // also blur when a touchstart happens elsewhere (covers some mobile edge cases)
-    const onDocTouch = (e) => {
-      const activeEl = document.activeElement;
-      if (activeEl && el.contains(activeEl) && !el.contains(e.target)) {
+    const onDocTouch = (e: TouchEvent) => {
+      const activeEl = document.activeElement as HTMLElement | null;
+      if (activeEl && el.contains(activeEl) && !el.contains(e.target as Node)) {
         activeEl.blur();
       }
     };
@@ -104,7 +107,7 @@ export default function Projects() {
       el.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("touchstart", onDocTouch);
     };
-  }, [carousel.containerRef]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [carousel.containerRef]);
 
   return (
     <section
@@ -138,8 +141,8 @@ export default function Projects() {
                       alt={currentFeatured.title}
                       className="w-full h-full object-contain object-center transition-transform duration-500 hover:scale-105"
                       loading="lazy"
-                      width="1280"
-                      height="720"
+                      width={1280}
+                      height={720}
                     />
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent to-white dark:to-black opacity-20" />
                   </>
@@ -241,16 +244,17 @@ export default function Projects() {
                       {currentFeatured.longDesc}
                     </p>
 
-                    {currentFeatured.longDesc.length > 180 && (
-                      <button
-                        type="button"
-                        onClick={() => setActive(currentFeatured)}
-                        className="absolute bottom-0 right-0 text-sm font-semibold underline bg-white dark:bg-gray-800 px-2 py-1 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary"
-                        aria-label={`View more details about ${currentFeatured.title}`}
-                      >
-                        View more
-                      </button>
-                    )}
+                    {currentFeatured.longDesc &&
+                      currentFeatured.longDesc.length > 180 && (
+                        <button
+                          type="button"
+                          onClick={() => setActive(currentFeatured)}
+                          className="absolute bottom-0 right-0 text-sm font-semibold underline bg-white dark:bg-gray-800 px-2 py-1 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary"
+                          aria-label={`View more details about ${currentFeatured.title}`}
+                        >
+                          View more
+                        </button>
+                      )}
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-4">
