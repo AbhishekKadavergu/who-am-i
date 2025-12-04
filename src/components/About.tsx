@@ -16,7 +16,7 @@ const About: React.FC = () => (
         Abhishek Kadavergu
       </h1>
       <p className="text-lg text-gray-800 dark:text-yellow-200 font-medium mb-2">
-        Full-Stack Developer | Node, React, Angular, AWS
+        Full-Stack Developer | JavaScript • TypeScript • React • Node • AWS
       </p>
       <span className="inline-block bg-primary text-black dark:bg-yellow-400 dark:text-gray-900 px-4 py-1 rounded-full font-semibold shadow-md">
         Bangalore, India
@@ -29,15 +29,22 @@ const About: React.FC = () => (
         👋 Who Am I?
       </h2>
       <p className="mb-3 text-lg text-gray-700 dark:text-yellow-100">
-        Hi! I’m <span className="font-bold">Abhishek Kadavergu</span>,
-        passionate about building things that matter and always eager to learn
-        something new. My journey began after my MCA, and since then, I’ve grown
-        from an Angular developer at TCS to a full-stack engineer at{" "}
-        <span className="font-bold">Airbus</span>, working on microservices,
-        micro frontends, and cloud-native solutions with AWS and PostgreSQL.
+        Hi — I’m <span className="font-bold">Abhishek Kadavergu</span>. I build
+        practical software that helps teams move faster and reduces everyday
+        friction. After completing my MCA I worked with Angular at TCS and later
+        moved into full-stack roles where I design and ship reliable,
+        maintainable systems.
       </p>
+
+      <p className="mb-3 text-lg text-gray-700 dark:text-yellow-100">
+        Today I work at <span className="font-bold">Airbus</span>, contributing
+        to microservices, micro frontends, and cloud-first solutions using AWS
+        and PostgreSQL. I focus on clear architecture and reusable tooling —
+        small investments that pay off across teams.
+      </p>
+
       <blockquote className="border-l-4 border-primary dark:border-yellow-400 pl-4 italic text-primary dark:text-yellow-400 mb-2">
-        “I love solving real-world problems and making tech accessible.”
+        “I like building things that are simple, reliable, and useful.”
       </blockquote>
     </div>
 
@@ -48,25 +55,29 @@ const About: React.FC = () => (
       </h2>
       <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-yellow-100">
         <li>
-          Build <span className="font-semibold">full-stack apps</span> with
-          clean user experiences.
+          Build <span className="font-semibold">full-stack applications</span>{" "}
+          with clear, maintainable architecture.
         </li>
-        <li>Automate workflows and pipelines for speed and reliability.</li>
+        <li>Create workflows and automation that improve team efficiency.</li>
         <li>
-          Design cloud solutions with <span className="font-semibold">AWS</span>{" "}
-          (Serverless, Lambda, S3, DynamoDB).
+          Design and deploy cloud solutions on{" "}
+          <span className="font-semibold">AWS</span> (Lambda, S3, API Gateway,
+          DynamoDB).
+        </li>
+        <li>
+          Build reusable libraries, shared components, and standards for large
+          teams.
         </li>
       </ul>
+
       <p className="mb-1 text-gray-800 dark:text-yellow-100">
-        My favorite tools: <span className="font-bold">Node.js</span>,{" "}
+        Tools I use: <span className="font-bold">Node.js</span>,{" "}
         <span className="font-bold">React</span>,{" "}
         <span className="font-bold">Angular</span>,{" "}
-        <span className="font-bold">NestJS</span>,{" "}
         <span className="font-bold">TypeScript</span>.
       </p>
       <p className="mb-1 text-gray-800 dark:text-yellow-100">
-        Currently geeking out on <span className="font-bold">DSA in Java</span>{" "}
-        and diving deeper into AWS.
+        Currently improving on system design, cloud patterns, and DSA.
       </p>
     </div>
 
@@ -76,25 +87,18 @@ const About: React.FC = () => (
         🌱 Beyond the Resume
       </h2>
       <p className="mb-2 text-gray-800 dark:text-blue-100">
-        This site is more than a portfolio—it's a peek into what drives me
-        outside of work:
+        I focus on routines that keep me effective and curious:
       </p>
       <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-blue-100">
+        <li>Mentoring new developers and sharing practical learnings.</li>
+        <li>Staying active — gym sessions, badminton, and cricket.</li>
         <li>
-          💡 <span className="font-semibold">Mentoring</span> new developers and
-          sharing what I’ve learned.
-        </li>
-        <li>
-          🏋️‍♂️ Hitting the <span className="font-semibold">gym</span> to stay
-          sharp.
-        </li>
-        <li>
-          🏸 Playing <span className="font-semibold">badminton</span> and{" "}
-          <span className="font-semibold">cricket</span> to recharge.
+          Exploring architecture, cloud patterns, and algorithms in my free
+          time.
         </li>
       </ul>
       <blockquote className="border-l-4 border-blue-400 dark:border-blue-300 pl-4 italic text-blue-700 dark:text-blue-300">
-        “Balance outside work sparks creativity in my code.”
+        “Consistency outside work helps me stay consistent inside work.”
       </blockquote>
     </div>
 
@@ -104,15 +108,12 @@ const About: React.FC = () => (
         🚀 Why This Site?
       </h2>
       <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-green-100">
-        <li>Share my projects and growth journey.</li>
-        <li>Highlight interests and skills beyond a job profile.</li>
-        <li>
-          Give a quick glimpse into who I am—not just as a developer, but as a
-          person.
-        </li>
+        <li>Show practical project work and the thinking behind it.</li>
+        <li>Share skills and patterns I use to build reliable systems.</li>
+        <li>Offer a straightforward view of who I am and how I work.</li>
       </ul>
       <p className="text-green-700 dark:text-green-300 font-semibold">
-        Let’s connect and build something awesome together!
+        If my approach resonates, I’d be glad to connect and collaborate.
       </p>
     </div>
   </section>
