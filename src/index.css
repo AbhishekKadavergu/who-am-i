@@ -1,3 +1,127 @@
 @import "tailwindcss";
 
-/* Use Tailwind classes for all styling. Remove custom button and link styles for consistency. */
+/* Premium skills marquee styles */
+
+/* variables: tweak duration to speed up/slow down */
+:root {
+  --marquee-duration: 20s; /* adjust for speed */
+  --chip-gap: 1.5rem;
+  --chip-padding: 0.75rem 1rem;
+  --chip-radius: 0.75rem;
+  --chip-bg: rgba(255,255,255,0.9);
+  --chip-bg-dark: rgba(30,30,30,0.45);
+}
+
+/* Track animation: translate left by 50% (because content duplicated) */
+@keyframes marquee {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-50%,0,0); }
+}
+
+/* main track container */
+.marquee-track {
+  display: flex;
+  gap: var(--chip-gap);
+  align-items: center;
+  /* ensure GPU-accelerated transform */
+  transform: translate3d(0,0,0);
+  will-change: transform;
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+
+/* group holds one copy of the items */
+.marquee-group {
+  display: inline-flex;
+  gap: var(--chip-gap);
+  align-items: center;
+  padding-bottom: 4px;
+}
+
+/* each skill chip */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 130px;
+  padding: var(--chip-padding);
+  border-radius: var(--chip-radius);
+  background: var(--chip-bg);
+  box-shadow: 0 6px 18px rgba(10,10,10,0.06);
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, background .2s;
+  border: 1px solid rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px);
+}
+
+/* dark mode chip background */
+.dark .skill-chip {
+  background: var(--chip-bg-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.45);
+}
+
+/* icon container */
+.skill-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.85));
+  box-shadow: 0 4px 10px rgba(10,10,10,0.06);
+}
+
+/* dark icon bubble */
+.dark .skill-icon {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+
+/* label styling */
+.skill-label {
+  font-weight: 600;
+  color: #111827; /* gray-900 */
+  font-size: 0.95rem;
+}
+.dark .skill-label { color: #f3f4f6; /* gray-100 */ }
+
+/* Hover / focus effect (pause marquee and uplift chip) */
+.marquee-track:hover,
+.marquee-track:focus-within {
+  animation-play-state: paused;
+}
+.skill-chip:hover,
+.skill-chip:focus {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 14px 34px rgba(2,6,23,0.16);
+  cursor: default;
+}
+
+/* shimmer overlay for depth (subtle) */
+@keyframes shimmerMove {
+  0% { transform: translateX(-30%); opacity: 0; }
+  50% { transform: translateX(30%); opacity: 0.25; }
+  100% { transform: translateX(130%); opacity: 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  mix-blend-mode: overlay;
+  animation: shimmerMove 8s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .shimmer {
+    animation: none !important;
+  }
+  .skill-chip { transition: none; transform: none; }
+}
+
+/* Responsiveness: smaller chips on mobile */
+@media (max-width: 640px) {
+  .skill-chip { min-width: 100px; padding: 0.5rem 0.75rem; }
+  .skill-label { font-size: 0.85rem; }
+  :root { --marquee-duration: 24s; }
+}
+
