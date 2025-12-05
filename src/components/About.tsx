@@ -1,5 +1,22 @@
 import React from "react";
 
+const skills = [
+  { name: "JavaScript", icon: "/icons/javascript.png" },
+  { name: "TypeScript", icon: "/icons/typescript.png" },
+  { name: "React", icon: "/icons/react.png" },
+  { name: "Node.js", icon: "/icons/node.png" },
+  { name: "Angular", icon: "/icons/angular.png" },
+  { name: "AWS", icon: "/icons/aws.png" },
+  { name: "PostgreSQL", icon: "/icons/postgresql.png" },
+  { name: "Docker", icon: "/icons/docker.png" },
+  { name: "Git", icon: "/icons/git.png" },
+  { name: "GitHub", icon: "/icons/github.png" },
+  { name: "HTML", icon: "/icons/html5.png" },
+  { name: "CSS", icon: "/icons/css.png" },
+  { name: "Jenkins", icon: "/icons/jenkins.png" },
+  { name: "SonarQube", icon: "/icons/sonarqube.png" },
+];
+
 const About: React.FC = () => (
   <section
     id="about"
@@ -31,16 +48,17 @@ const About: React.FC = () => (
       <p className="mb-3 text-lg text-gray-700 dark:text-yellow-100">
         Hi — I’m <span className="font-bold">Abhishek Kadavergu</span>. I build
         practical software that helps teams move faster and reduces everyday
-        friction. After completing my MCA I worked with Angular at TCS and later
-        moved into full-stack roles where I design and ship reliable,
-        maintainable systems.
+        friction. After completing my MCA I worked with Angular at{" "}
+        <span className="font-bold">TCS</span> and later moved into full-stack
+        roles where I design and ship reliable, maintainable systems.
       </p>
 
       <p className="mb-3 text-lg text-gray-700 dark:text-yellow-100">
         Today I work at <span className="font-bold">Airbus</span>, contributing
-        to microservices, micro frontends, and cloud-first solutions using AWS
-        and PostgreSQL. I focus on clear architecture and reusable tooling —
-        small investments that pay off across teams.
+        to microservices, micro frontends, and cloud-first solutions using
+        Node.js, Angular, React, TypeScript, AWS and PostgreSQL. I focus on
+        clear architecture and reusable tooling — small investments that pay off
+        across teams.
       </p>
 
       <blockquote className="border-l-4 border-primary dark:border-yellow-400 pl-4 italic text-primary dark:text-yellow-400 mb-2">
@@ -61,24 +79,20 @@ const About: React.FC = () => (
         <li>Create workflows and automation that improve team efficiency.</li>
         <li>
           Design and deploy cloud solutions on{" "}
-          <span className="font-semibold">AWS</span> (Lambda, S3, API Gateway,
-          DynamoDB).
+          <span className="font-semibold">AWS</span>.
         </li>
         <li>
           Build reusable libraries, shared components, and standards for large
           teams.
         </li>
+        <li>
+          Tools I use: <span className="font-bold">Node.js</span>,{" "}
+          <span className="font-bold">React</span>,{" "}
+          <span className="font-bold">Angular</span>,{" "}
+          <span className="font-bold">TypeScript</span>.
+        </li>
+        <li>Currently improving on system design, cloud patterns, and DSA.</li>
       </ul>
-
-      <p className="mb-1 text-gray-800 dark:text-yellow-100">
-        Tools I use: <span className="font-bold">Node.js</span>,{" "}
-        <span className="font-bold">React</span>,{" "}
-        <span className="font-bold">Angular</span>,{" "}
-        <span className="font-bold">TypeScript</span>.
-      </p>
-      <p className="mb-1 text-gray-800 dark:text-yellow-100">
-        Currently improving on system design, cloud patterns, and DSA.
-      </p>
     </div>
 
     {/* Beyond the Resume */}
@@ -91,7 +105,7 @@ const About: React.FC = () => (
       </p>
       <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-blue-100">
         <li>Mentoring new developers and sharing practical learnings.</li>
-        <li>Staying active — gym sessions, badminton, and cricket.</li>
+        <li>Staying active — gym, badminton, and cricket.</li>
         <li>
           Exploring architecture, cloud patterns, and algorithms in my free
           time.
@@ -103,7 +117,7 @@ const About: React.FC = () => (
     </div>
 
     {/* Why This Site? */}
-    <div className="max-w-2xl mx-auto bg-green-50 dark:bg-green-900 rounded-xl shadow-lg p-8 text-left">
+    <div className="max-w-2xl mx-auto bg-green-50 dark:bg-green-900 rounded-xl shadow-lg p-8 text-left mb-12">
       <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-green-700 dark:text-green-300">
         🚀 Why This Site?
       </h2>
@@ -115,6 +129,59 @@ const About: React.FC = () => (
       <p className="text-green-700 dark:text-green-300 font-semibold">
         If my approach resonates, I’d be glad to connect and collaborate.
       </p>
+    </div>
+
+    {/* Skills Marquee */}
+    {/* Skills — premium marquee */}
+    <div className="w-full py-8 px-6 bg-gradient-to-r from-white to-yellow-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl relative overflow-hidden">
+      <h2 className="text-2xl font-bold text-center mb-6 text-primary dark:text-yellow-400">
+        Skills
+      </h2>
+
+      <div
+        className="relative"
+        aria-hidden={false}
+        role="region"
+        aria-label="Skills marquee"
+      >
+        {/* marquee track (duplicated list for seamless loop) */}
+        <div className="marquee-track" aria-hidden="true">
+          <div className="marquee-group">
+            {skills.map((skill) => (
+              <div key={skill.name} role="listitem" className="skill-chip">
+                <div className="skill-icon">
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className="w-8 h-8 object-contain"
+                  />
+                </div>
+                <div className="skill-label">{skill.name}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* duplicate for seamless loop */}
+          <div className="marquee-group" aria-hidden="true">
+            {skills.map((skill) => (
+              <div key={`${skill.name}-dup`} className="skill-chip">
+                <div className="skill-icon">
+                  <img
+                    src={skill.icon}
+                    alt=""
+                    aria-hidden="true"
+                    className="w-8 h-8 object-contain"
+                  />
+                </div>
+                <div className="skill-label">{skill.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* subtle shimmer overlay */}
+        <div className="pointer-events-none absolute inset-0 opacity-0 lg:opacity-30 shimmer" />
+      </div>
     </div>
   </section>
 );
