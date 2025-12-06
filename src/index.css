@@ -1,127 +1,138 @@
 @import "tailwindcss";
 
-/* Premium skills marquee styles */
+/* ====== Premium fixed-size skill pills ====== */
 
-/* variables: tweak duration to speed up/slow down */
 :root {
-  --marquee-duration: 20s; /* adjust for speed */
-  --chip-gap: 1.5rem;
-  --chip-padding: 0.75rem 1rem;
-  --chip-radius: 0.75rem;
-  --chip-bg: rgba(255,255,255,0.9);
-  --chip-bg-dark: rgba(30,30,30,0.45);
+  --skill-pill-width: 160px;   /* fixed pill width */
+  --skill-pill-height: 56px;   /* fixed pill height */
+  --skill-pill-gap: 1rem;      /* gap between pills */
+  --skill-icon-size: 44px;     /* icon container size */
+  --skill-icon-img: 32px;      /* actual icon image size */
+  --marquee-duration: 20s;     /* overall loop duration (larger = slower) */
 }
 
-/* Track animation: translate left by 50% (because content duplicated) */
-@keyframes marquee {
+/* viewport + track */
+.skills-marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.skills-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--skill-pill-gap);
+  width: max-content;
+  animation: skills-marquee var(--marquee-duration) linear infinite;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* pill: fixed size, centered content */
+.skill-pill {
+  width: var(--skill-pill-width);
+  height: var(--skill-pill-height);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem;               /* horizontal padding won't change layout because width is fixed */
+  border-radius: 999px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.06);
+  white-space: nowrap;
+  overflow: hidden;              /* keep content inside fixed width */
+  text-overflow: ellipsis;
+  transition: transform .22s ease, box-shadow .22s ease;
+  flex: 0 0 auto;                /* do not shrink or grow */
+  justify-content: flex-start;   /* icon left, label right */
+}
+
+/* dark theme */
+.dark .skill-pill {
+  background: rgba(20,20,20,0.75);
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.55);
+}
+
+/* icon bubble */
+.skill-pill-icon {
+  width: var(--skill-icon-size);
+  height: var(--skill-icon-size);
+  min-width: var(--skill-icon-size);
+  min-height: var(--skill-icon-size);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 20%, #fff, #fdc700 40%);
+  box-shadow: 0 6px 16px rgba(8,10,20,0.06);
+  flex-shrink: 0;
+}
+
+/* dark icon bubble */
+.dark .skill-pill-icon {
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 7px 20px rgba(0,0,0,0.55);
+}
+
+/* icon image - give exact size to avoid layout shift */
+.skill-pill-icon img {
+  width: var(--skill-icon-img);
+  height: var(--skill-icon-img);
+  display: block;
+  object-fit: contain;
+}
+
+/* label: truncate if too long */
+.skill-pill-label {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #0f172a;
+  line-height: 1;
+}
+
+/* dark label color */
+.dark .skill-pill-label { color: #f8fafc; }
+
+/* hover lift */
+.skill-pill:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(2,6,23,0.14);
+}
+
+/* marquee animation: move left by 50% (duplicate row) */
+@keyframes skills-marquee {
   0% { transform: translate3d(0,0,0); }
   100% { transform: translate3d(-50%,0,0); }
 }
 
-/* main track container */
-.marquee-track {
-  display: flex;
-  gap: var(--chip-gap);
-  align-items: center;
-  /* ensure GPU-accelerated transform */
-  transform: translate3d(0,0,0);
-  will-change: transform;
-  animation: marquee var(--marquee-duration) linear infinite;
-}
-
-/* group holds one copy of the items */
-.marquee-group {
-  display: inline-flex;
-  gap: var(--chip-gap);
-  align-items: center;
-  padding-bottom: 4px;
-}
-
-/* each skill chip */
-.skill-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-width: 130px;
-  padding: var(--chip-padding);
-  border-radius: var(--chip-radius);
-  background: var(--chip-bg);
-  box-shadow: 0 6px 18px rgba(10,10,10,0.06);
-  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, background .2s;
-  border: 1px solid rgba(0,0,0,0.06);
-  backdrop-filter: blur(6px);
-}
-
-/* dark mode chip background */
-.dark .skill-chip {
-  background: var(--chip-bg-dark);
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 8px 26px rgba(0,0,0,0.45);
-}
-
-/* icon container */
-.skill-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.85));
-  box-shadow: 0 4px 10px rgba(10,10,10,0.06);
-}
-
-/* dark icon bubble */
-.dark .skill-icon {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
-}
-
-/* label styling */
-.skill-label {
-  font-weight: 600;
-  color: #111827; /* gray-900 */
-  font-size: 0.95rem;
-}
-.dark .skill-label { color: #f3f4f6; /* gray-100 */ }
-
-/* Hover / focus effect (pause marquee and uplift chip) */
-.marquee-track:hover,
-.marquee-track:focus-within {
+/* pause when hovering viewport */
+.skills-marquee-viewport:hover .skills-marquee-track,
+.skills-marquee-viewport:focus-within .skills-marquee-track {
   animation-play-state: paused;
 }
-.skill-chip:hover,
-.skill-chip:focus {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 14px 34px rgba(2,6,23,0.16);
-  cursor: default;
-}
 
-/* shimmer overlay for depth (subtle) */
-@keyframes shimmerMove {
-  0% { transform: translateX(-30%); opacity: 0; }
-  50% { transform: translateX(30%); opacity: 0.25; }
-  100% { transform: translateX(130%); opacity: 0; }
-}
-.shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-  mix-blend-mode: overlay;
-  animation: shimmerMove 8s ease-in-out infinite;
-}
-
-/* Respect reduced motion */
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track,
-  .shimmer {
-    animation: none !important;
-  }
-  .skill-chip { transition: none; transform: none; }
+  .skills-marquee-track { animation: none !important; }
+  .skill-pill { transition: none; transform: none; }
 }
 
-/* Responsiveness: smaller chips on mobile */
-@media (max-width: 640px) {
-  .skill-chip { min-width: 100px; padding: 0.5rem 0.75rem; }
-  .skill-label { font-size: 0.85rem; }
-  :root { --marquee-duration: 24s; }
+/* responsive tweaks */
+@media (max-width: 768px) {
+  :root {
+    --skill-pill-width: 140px;
+    --skill-pill-height: 52px;
+    --skill-icon-size: 40px;
+    --skill-icon-img: 28px;
+    --marquee-duration: 24s;
+  }
+  .skill-pill-label { font-size: 0.86rem; }
 }
+
+
 
