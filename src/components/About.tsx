@@ -1,20 +1,22 @@
 import React from "react";
 
-const skills = [
-  { name: "JavaScript", icon: "/icons/javascript.png" },
-  { name: "TypeScript", icon: "/icons/typescript.png" },
-  { name: "React", icon: "/icons/react.png" },
-  { name: "Node.js", icon: "/icons/node.png" },
-  { name: "Angular", icon: "/icons/angular.png" },
-  { name: "AWS", icon: "/icons/aws.png" },
-  { name: "PostgreSQL", icon: "/icons/postgresql.png" },
-  { name: "Docker", icon: "/icons/docker.png" },
-  { name: "Git", icon: "/icons/git.png" },
-  { name: "GitHub", icon: "/icons/github.png" },
-  { name: "HTML", icon: "/icons/html5.png" },
-  { name: "CSS", icon: "/icons/css.png" },
-  { name: "Jenkins", icon: "/icons/jenkins.png" },
-  { name: "SonarQube", icon: "/icons/sonarqube.png" },
+export type Skill = { name: string; icon: string };
+
+const skills: Skill[] = [
+  { name: "JavaScript", icon: "/icons/javascript.svg" },
+  { name: "TypeScript", icon: "/icons/typescript.svg" },
+  { name: "React", icon: "/icons/react.svg" },
+  { name: "Node.js", icon: "/icons/node.svg" },
+  { name: "Angular", icon: "/icons/angular.svg" },
+  { name: "AWS", icon: "/icons/aws.svg" },
+  { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
+  { name: "Docker", icon: "/icons/docker.svg" },
+  { name: "Git", icon: "/icons/git.svg" },
+  { name: "GitHub", icon: "/icons/github.svg" },
+  { name: "HTML", icon: "/icons/html5.svg" },
+  { name: "CSS", icon: "/icons/css.svg" },
+  { name: "Jenkins", icon: "/icons/jenkins.svg" },
+  { name: "SonarQube", icon: "/icons/sonarqube.svg" },
 ];
 
 const About: React.FC = () => (
@@ -131,56 +133,50 @@ const About: React.FC = () => (
       </p>
     </div>
 
-    {/* Skills Marquee */}
-    {/* Skills — premium marquee */}
-    <div className="w-full py-8 px-6 bg-gradient-to-r from-white to-yellow-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl relative overflow-hidden">
-      <h2 className="text-2xl font-bold text-center mb-6 text-primary dark:text-yellow-400">
+    {/* Skills */}
+    <div className="w-full py-10 px-6 bg-gradient-to-r from-white to-yellow-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl mt-4">
+      <h1 className="text-3xl font-bold text-center mb-6 text-primary dark:text-yellow-400">
         Skills
-      </h2>
+      </h1>
 
-      <div
-        className="relative"
-        aria-hidden={false}
-        role="region"
-        aria-label="Skills marquee"
-      >
-        {/* marquee track (duplicated list for seamless loop) */}
-        <div className="marquee-track" aria-hidden="true">
-          <div className="marquee-group">
-            {skills.map((skill) => (
-              <div key={skill.name} role="listitem" className="skill-chip">
-                <div className="skill-icon">
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-8 h-8 object-contain"
-                  />
-                </div>
-                <div className="skill-label">{skill.name}</div>
+      <div className="skills-marquee-viewport">
+        <div className="skills-marquee-track">
+          {/* original row */}
+          {skills.map((skill) => (
+            <div key={skill.name} className="skill-pill">
+              <div className="skill-pill-icon">
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
               </div>
-            ))}
-          </div>
+              <span className="skill-pill-label">{skill.name}</span>
+            </div>
+          ))}
 
-          {/* duplicate for seamless loop */}
-          <div className="marquee-group" aria-hidden="true">
-            {skills.map((skill) => (
-              <div key={`${skill.name}-dup`} className="skill-chip">
-                <div className="skill-icon">
-                  <img
-                    src={skill.icon}
-                    alt=""
-                    aria-hidden="true"
-                    className="w-8 h-8 object-contain"
-                  />
-                </div>
-                <div className="skill-label">{skill.name}</div>
+          {/* duplicate row for seamless looping – not visually jarring, just continuity */}
+          {skills.map((skill) => (
+            <div
+              key={`${skill.name}-dup`}
+              className="skill-pill"
+              aria-hidden="true"
+            >
+              <div className="skill-pill-icon">
+                <img
+                  src={skill.icon}
+                  alt=""
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
               </div>
-            ))}
-          </div>
+              <span className="skill-pill-label">{skill.name}</span>
+            </div>
+          ))}
         </div>
-
-        {/* subtle shimmer overlay */}
-        <div className="pointer-events-none absolute inset-0 opacity-0 lg:opacity-30 shimmer" />
       </div>
     </div>
   </section>
