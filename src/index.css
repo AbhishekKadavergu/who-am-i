@@ -1,3 +1,138 @@
 @import "tailwindcss";
 
-/* Use Tailwind classes for all styling. Remove custom button and link styles for consistency. */
+/* ====== Premium fixed-size skill pills ====== */
+
+:root {
+  --skill-pill-width: 160px;   /* fixed pill width */
+  --skill-pill-height: 56px;   /* fixed pill height */
+  --skill-pill-gap: 1rem;      /* gap between pills */
+  --skill-icon-size: 44px;     /* icon container size */
+  --skill-icon-img: 32px;      /* actual icon image size */
+  --marquee-duration: 20s;     /* overall loop duration (larger = slower) */
+}
+
+/* viewport + track */
+.skills-marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.skills-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--skill-pill-gap);
+  width: max-content;
+  animation: skills-marquee var(--marquee-duration) linear infinite;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* pill: fixed size, centered content */
+.skill-pill {
+  width: var(--skill-pill-width);
+  height: var(--skill-pill-height);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem;               /* horizontal padding won't change layout because width is fixed */
+  border-radius: 999px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.06);
+  white-space: nowrap;
+  overflow: hidden;              /* keep content inside fixed width */
+  text-overflow: ellipsis;
+  transition: transform .22s ease, box-shadow .22s ease;
+  flex: 0 0 auto;                /* do not shrink or grow */
+  justify-content: flex-start;   /* icon left, label right */
+}
+
+/* dark theme */
+.dark .skill-pill {
+  background: rgba(20,20,20,0.75);
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.55);
+}
+
+/* icon bubble */
+.skill-pill-icon {
+  width: var(--skill-icon-size);
+  height: var(--skill-icon-size);
+  min-width: var(--skill-icon-size);
+  min-height: var(--skill-icon-size);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 20%, #fff, #fdc700 40%);
+  box-shadow: 0 6px 16px rgba(8,10,20,0.06);
+  flex-shrink: 0;
+}
+
+/* dark icon bubble */
+.dark .skill-pill-icon {
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 7px 20px rgba(0,0,0,0.55);
+}
+
+/* icon image - give exact size to avoid layout shift */
+.skill-pill-icon img {
+  width: var(--skill-icon-img);
+  height: var(--skill-icon-img);
+  display: block;
+  object-fit: contain;
+}
+
+/* label: truncate if too long */
+.skill-pill-label {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #0f172a;
+  line-height: 1;
+}
+
+/* dark label color */
+.dark .skill-pill-label { color: #f8fafc; }
+
+/* hover lift */
+.skill-pill:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(2,6,23,0.14);
+}
+
+/* marquee animation: move left by 50% (duplicate row) */
+@keyframes skills-marquee {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-50%,0,0); }
+}
+
+/* pause when hovering viewport */
+.skills-marquee-viewport:hover .skills-marquee-track,
+.skills-marquee-viewport:focus-within .skills-marquee-track {
+  animation-play-state: paused;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .skills-marquee-track { animation: none !important; }
+  .skill-pill { transition: none; transform: none; }
+}
+
+/* responsive tweaks */
+@media (max-width: 768px) {
+  :root {
+    --skill-pill-width: 140px;
+    --skill-pill-height: 52px;
+    --skill-icon-size: 40px;
+    --skill-icon-img: 28px;
+    --marquee-duration: 24s;
+  }
+  .skill-pill-label { font-size: 0.86rem; }
+}
+
+
+

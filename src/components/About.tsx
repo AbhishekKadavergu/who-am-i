@@ -1,5 +1,24 @@
 import React from "react";
 
+export type Skill = { name: string; icon: string };
+
+const skills: Skill[] = [
+  { name: "JavaScript", icon: "/icons/javascript.svg" },
+  { name: "TypeScript", icon: "/icons/typescript.svg" },
+  { name: "React", icon: "/icons/react.svg" },
+  { name: "Node.js", icon: "/icons/node.svg" },
+  { name: "Angular", icon: "/icons/angular.svg" },
+  { name: "AWS", icon: "/icons/aws.svg" },
+  { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
+  { name: "Docker", icon: "/icons/docker.svg" },
+  { name: "Git", icon: "/icons/git.svg" },
+  { name: "GitHub", icon: "/icons/github.svg" },
+  { name: "HTML", icon: "/icons/html5.svg" },
+  { name: "CSS", icon: "/icons/css.svg" },
+  { name: "Jenkins", icon: "/icons/jenkins.svg" },
+  { name: "SonarQube", icon: "/icons/sonarqube.svg" },
+];
+
 const About: React.FC = () => (
   <section
     id="about"
@@ -31,16 +50,17 @@ const About: React.FC = () => (
       <p className="mb-3 text-lg text-gray-700 dark:text-yellow-100">
         Hi — I’m <span className="font-bold">Abhishek Kadavergu</span>. I build
         practical software that helps teams move faster and reduces everyday
-        friction. After completing my MCA I worked with Angular at TCS and later
-        moved into full-stack roles where I design and ship reliable,
-        maintainable systems.
+        friction. After completing my MCA I worked with Angular at{" "}
+        <span className="font-bold">TCS</span> and later moved into full-stack
+        roles where I design and ship reliable, maintainable systems.
       </p>
 
       <p className="mb-3 text-lg text-gray-700 dark:text-yellow-100">
         Today I work at <span className="font-bold">Airbus</span>, contributing
-        to microservices, micro frontends, and cloud-first solutions using AWS
-        and PostgreSQL. I focus on clear architecture and reusable tooling —
-        small investments that pay off across teams.
+        to microservices, micro frontends, and cloud-first solutions using
+        Node.js, Angular, React, TypeScript, AWS and PostgreSQL. I focus on
+        clear architecture and reusable tooling — small investments that pay off
+        across teams.
       </p>
 
       <blockquote className="border-l-4 border-primary dark:border-yellow-400 pl-4 italic text-primary dark:text-yellow-400 mb-2">
@@ -61,24 +81,20 @@ const About: React.FC = () => (
         <li>Create workflows and automation that improve team efficiency.</li>
         <li>
           Design and deploy cloud solutions on{" "}
-          <span className="font-semibold">AWS</span> (Lambda, S3, API Gateway,
-          DynamoDB).
+          <span className="font-semibold">AWS</span>.
         </li>
         <li>
           Build reusable libraries, shared components, and standards for large
           teams.
         </li>
+        <li>
+          Tools I use: <span className="font-bold">Node.js</span>,{" "}
+          <span className="font-bold">React</span>,{" "}
+          <span className="font-bold">Angular</span>,{" "}
+          <span className="font-bold">TypeScript</span>.
+        </li>
+        <li>Currently improving on system design, cloud patterns, and DSA.</li>
       </ul>
-
-      <p className="mb-1 text-gray-800 dark:text-yellow-100">
-        Tools I use: <span className="font-bold">Node.js</span>,{" "}
-        <span className="font-bold">React</span>,{" "}
-        <span className="font-bold">Angular</span>,{" "}
-        <span className="font-bold">TypeScript</span>.
-      </p>
-      <p className="mb-1 text-gray-800 dark:text-yellow-100">
-        Currently improving on system design, cloud patterns, and DSA.
-      </p>
     </div>
 
     {/* Beyond the Resume */}
@@ -91,7 +107,7 @@ const About: React.FC = () => (
       </p>
       <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-blue-100">
         <li>Mentoring new developers and sharing practical learnings.</li>
-        <li>Staying active — gym sessions, badminton, and cricket.</li>
+        <li>Staying active — gym, badminton, and cricket.</li>
         <li>
           Exploring architecture, cloud patterns, and algorithms in my free
           time.
@@ -103,7 +119,7 @@ const About: React.FC = () => (
     </div>
 
     {/* Why This Site? */}
-    <div className="max-w-2xl mx-auto bg-green-50 dark:bg-green-900 rounded-xl shadow-lg p-8 text-left">
+    <div className="max-w-2xl mx-auto bg-green-50 dark:bg-green-900 rounded-xl shadow-lg p-8 text-left mb-12">
       <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-green-700 dark:text-green-300">
         🚀 Why This Site?
       </h2>
@@ -115,6 +131,53 @@ const About: React.FC = () => (
       <p className="text-green-700 dark:text-green-300 font-semibold">
         If my approach resonates, I’d be glad to connect and collaborate.
       </p>
+    </div>
+
+    {/* Skills */}
+    <div className="w-full py-10 px-6 bg-gradient-to-r from-white to-yellow-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl mt-4">
+      <h1 className="text-3xl font-bold text-center mb-6 text-primary dark:text-yellow-400">
+        Skills
+      </h1>
+
+      <div className="skills-marquee-viewport">
+        <div className="skills-marquee-track">
+          {/* original row */}
+          {skills.map((skill) => (
+            <div key={skill.name} className="skill-pill">
+              <div className="skill-pill-icon">
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
+              </div>
+              <span className="skill-pill-label">{skill.name}</span>
+            </div>
+          ))}
+
+          {/* duplicate row for seamless looping – not visually jarring, just continuity */}
+          {skills.map((skill) => (
+            <div
+              key={`${skill.name}-dup`}
+              className="skill-pill"
+              aria-hidden="true"
+            >
+              <div className="skill-pill-icon">
+                <img
+                  src={skill.icon}
+                  alt=""
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
+              </div>
+              <span className="skill-pill-label">{skill.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 );

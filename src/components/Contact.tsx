@@ -64,7 +64,7 @@ const Contact: React.FC = () => {
       className="py-12 px-4 md:px-12 bg-primary-light dark:bg-primary-dark transition-colors duration-500 animate-fade-in"
     >
       <h2 className="text-2xl font-bold text-center mb-8 text-text-light dark:text-text-dark">
-        Contact
+        Connect with me
       </h2>
 
       {submitted ? (
