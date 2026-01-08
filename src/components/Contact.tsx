@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-
-type ContactForm = {
-  name: string;
-  email: string;
-  message: string;
-};
+import React, { useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import {
+  validateContactForm,
+  type ContactForm as ContactFormType,
+} from "../utils/validation";
+import Toast from "./Toast";
+import { UI_CONSTANTS } from "../constants/ui";
 
 const Contact: React.FC = () => {
-  const [form, setForm] = useState<ContactForm>({
+  const [form, setForm] = useState<ContactFormType>({
     name: "",
     email: "",
     message: "",
@@ -15,12 +16,16 @@ const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState<
+    Record<string, string>
+  >({});
+  const [showToast, setShowToast] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    const key = name as keyof ContactForm;
+    const key = name as keyof ContactFormType;
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -28,6 +33,13 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    const errors = validateContactForm(form);
+    setValidationErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/send-contact", {
@@ -37,7 +49,6 @@ const Contact: React.FC = () => {
       });
 
       if (!res.ok) {
-        // Simple, robust error extraction — don't rely on JSON shape
         const text = await res
           .text()
           .catch(() => res.statusText || "Failed to send message");
@@ -46,6 +57,8 @@ const Contact: React.FC = () => {
 
       setSubmitted(true);
       setForm({ name: "", email: "", message: "" });
+      setValidationErrors({});
+      setShowToast(true);
     } catch (err: unknown) {
       console.error("Contact send error", err);
       const message =
@@ -58,66 +71,140 @@ const Contact: React.FC = () => {
     }
   };
 
+  const isFormValid = useMemo(
+    () => Object.keys(validateContactForm(form)).length === 0,
+    [form]
+  );
+
   return (
     <section
       id="contact"
-      className="py-12 px-4 md:px-12 bg-primary-light dark:bg-primary-dark transition-colors duration-500 animate-fade-in"
+      className="py-16 px-4 md:px-12 bg-[var(--brand-bg)] transition-colors duration-500"
     >
-      <h2 className="text-2xl font-bold text-center mb-8 text-text-light dark:text-text-dark">
-        Connect with me
-      </h2>
-
-      {submitted ? (
-        <div className="text-primary text-center">
-          Thank you for reaching out!
-        </div>
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-lg mx-auto bg-white dark:bg-black p-6 rounded-lg shadow-lg space-y-4 border-2 border-primary"
+      <div className="max-w-4xl mx-auto">
+        <motion.h2
+          className="heading-lg text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-          <input
-            name="name"
-            type="text"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 rounded border border-primary bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary"
+          Let's Connect
+        </motion.h2>
+
+        {showToast && (
+          <Toast
+            message="Thank you! Your message has been sent successfully."
+            type="success"
+            duration={UI_CONSTANTS.TOAST_DURATION_MS}
+            onClose={() => setShowToast(false)}
           />
+        )}
 
-          <input
-            name="email"
-            type="email"
-            placeholder="Your Email"
-            value={form.email}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 rounded border border-primary bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            value={form.message}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 rounded border border-primary bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-
-          {error && (
-            <div className="text-red-600 text-sm font-semibold">{error}</div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 px-4 rounded bg-yellow-400 text-black font-bold text-lg hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+        {submitted ? (
+          <motion.div
+            className="text-center py-16 space-y-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-      )}
+            <div className="text-6xl">✓</div>
+            <h3 className="heading-md text-yellow-500">Message Sent!</h3>
+            <p className="text-body text-muted">
+              I'll get back to you as soon as possible.
+            </p>
+          </motion.div>
+        ) : (
+          <motion.form
+            onSubmit={handleSubmit}
+            className="card card-accent max-w-lg mx-auto p-8 space-y-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="block text-body-sm font-semibold"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                value={form.name}
+                onChange={handleChange}
+                className={`form-input ${validationErrors.name ? "error" : ""}`}
+                required
+              />
+              {validationErrors.name && (
+                <div className="form-error">{validationErrors.name}</div>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="email"
+                className="block text-body-sm font-semibold"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="your.email@example.com"
+                value={form.email}
+                onChange={handleChange}
+                className={`form-input ${validationErrors.email ? "error" : ""}`}
+                required
+              />
+              {validationErrors.email && (
+                <div className="form-error">{validationErrors.email}</div>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="message"
+                className="block text-body-sm font-semibold"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Your message..."
+                value={form.message}
+                onChange={handleChange}
+                rows={5}
+                className={`form-textarea ${validationErrors.message ? "error" : ""}`}
+                required
+              />
+              {validationErrors.message && (
+                <div className="form-error">{validationErrors.message}</div>
+              )}
+            </div>
+
+            {error && (
+              <div className="p-3 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-sm font-medium">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading || !isFormValid}
+              className="btn btn-primary w-full text-base"
+            >
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+          </motion.form>
+        )}
+      </div>
     </section>
   );
 };

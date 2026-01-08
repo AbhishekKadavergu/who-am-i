@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import type { Project } from "../data/projects";
 
 type Props = {
@@ -7,8 +8,12 @@ type Props = {
 
 export default function ProjectCard({ project, onOpen }: Props) {
   return (
-    <article className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden focus-within:ring-2 focus-within:ring-primary">
-      <div className="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+    <motion.article
+      className="card card-accent overflow-hidden cursor-pointer"
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="h-40 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
         {project.images && project.images.length > 0 ? (
           <img
             src={project.images[0]}
@@ -19,27 +24,20 @@ export default function ProjectCard({ project, onOpen }: Props) {
             height={320}
           />
         ) : (
-          <div className="text-gray-400">No image</div>
+          <div className="text-gray-400 dark:text-gray-500">No image</div>
         )}
       </div>
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-text-light dark:text-text-dark">
-          {project.title}
-        </h3>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-          {project.shortDesc}
-        </p>
-        <div className="mt-3 flex flex-wrap gap-2">
+      <div className="p-5 space-y-3">
+        <h3 className="heading-sm">{project.title}</h3>
+        <p className="text-body-sm text-muted">{project.shortDesc}</p>
+        <div className="flex flex-wrap gap-2">
           {project.tags?.slice(0, 4).map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full"
-            >
+            <span key={tag} className="badge">
               {tag}
             </span>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-between">
+        <div className="pt-2 flex items-center justify-between gap-3">
           <div className="flex gap-2">
             {project.demo && (
               <a
@@ -47,7 +45,7 @@ export default function ProjectCard({ project, onOpen }: Props) {
                 href={project.demo}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm px-3 py-1 bg-yellow-400 text-black rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                className="btn btn-primary text-sm"
               >
                 Demo
               </a>
@@ -58,7 +56,7 @@ export default function ProjectCard({ project, onOpen }: Props) {
                 href={project.repo}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm px-3 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                className="btn btn-secondary text-sm"
               >
                 Source
               </a>
@@ -67,12 +65,12 @@ export default function ProjectCard({ project, onOpen }: Props) {
           <button
             onClick={() => onOpen(project)}
             aria-label={`View details for ${project.title}`}
-            className="text-sm text-primary underline focus:outline-none focus:ring-2 focus:ring-primary"
+            className="text-link"
           >
             More
           </button>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
