@@ -1,63 +1,79 @@
-# who-am-i
+# Portfolio Website
 
-My portfolio website – projects, passions, and more beyond the resume.
+Modern portfolio showcasing projects, skills, and professional background with dark/light theme support.
 
-## Environment Variables
-
-This project uses environment variables to manage sensitive configuration. Use one of these approaches:
-
-### Option 1: `.env` files (Recommended for development)
-
-- Copy `.env.example` to `.env.local` and fill in your test values.
-- `.env.local` is git-ignored and safe for local development.
-- Required variables:
-  - `SENDGRID_API_KEY`: Your SendGrid API key (get one from [SendGrid](https://sendgrid.com))
-  - `CONTACT_TO_EMAIL`: Email address to receive contact form submissions
-
-### Option 2: Platform environment variables (Production)
-
-**For Vercel:**
-
-- Go to Project Settings → Environment Variables
-- Add `SENDGRID_API_KEY` and `CONTACT_TO_EMAIL` for Production
-
-**For Netlify:**
-
-- Go to Site Settings → Build & Deploy → Environment
-- Add the same variables
-
-### Contact form setup
-
-This project includes a serverless endpoint template at `api/send-contact.js` that forwards contact form submissions to an email provider (SendGrid).
+## Quick Start
 
 ```bash
-# Create a .env.local file from the template
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # Production build
+npm run lint     # ESLint check
+```
+
+## Tech Stack
+
+- **React 19** with TypeScript (strict mode)
+- **Vite 6** for fast builds
+- **Tailwind CSS 4** with custom theme variables
+- **Context API** for theme management
+- **Serverless API** (Vercel/Netlify functions)
+
+## Features
+
+- ✅ **Dark/Light Theme** — Auto-saved to localStorage
+- ✅ **Searchable Projects** — Debounced filtering, tag-based
+- ✅ **Contact Form** — Client-side validation, SendGrid integration
+- ✅ **Toast Notifications** — Success/error states
+- ✅ **Accessible** — WCAG 2.1 AA (keyboard nav, ARIA labels, semantic HTML)
+- ✅ **Responsive Design** — Mobile-first with Tailwind
+
+## Environment Setup
+
+### SendGrid (Contact Form)
+
+```bash
 cp .env.example .env.local
-# Edit .env.local with test values
-npm run dev  # Environment variables are automatically loaded
 ```
 
-If you prefer a different email provider, edit `api/send-contact.js` to use your provider's SDK.
+Add these variables:
 
-### Google Sheets integration (optional)
+```
+SENDGRID_API_KEY=your-sendgrid-api-key
+CONTACT_TO_EMAIL=your-email@example.com
+```
 
-Instead of sending an email, you can have contact submissions appended to a Google Sheet. The endpoint supports this via a Google service account.
+Deploy on **Vercel** or **Netlify** — add env vars in your platform's dashboard.
 
-Steps:
+### Optional: Google Sheets
 
-1. Create a Google Cloud project and enable the Google Sheets API.
-2. Create a service account and generate a JSON key.
-3. Share the target Google Sheet with the service account's client_email (from the JSON key) with Editor access.
-4. Add the following environment variables to your deployment or `.env.local`:
-  - `GOOGLE_SHEET_ID` — the ID portion of the sheet URL
-  - `GOOGLE_SERVICE_ACCOUNT` — either the raw service account JSON or the base64-encoded JSON (base64 helps avoid multiline issues in some dashboards)
+Store contact submissions in Google Sheets:
 
-Example (base64 encode on macOS/Linux):
+1. Create [Google Cloud project](https://console.cloud.google.com), enable Sheets API
+2. Create service account, download JSON key
+3. Share Google Sheet with service account email (Editor access)
+4. Base64-encode the JSON key: `cat key.json | base64` (or use online tool)
+5. Add env vars:
+   ```
+   GOOGLE_SHEET_ID=your-sheet-id
+   GOOGLE_SERVICE_ACCOUNT=base64-encoded-key
+   ```
+
+## Development
+
+- **Edit components:** `src/components/`
+- **Add projects:** `src/data/projects.ts`
+- **Add skills:** `src/data/skills.ts`
+- **Modify validation:** `src/utils/validation.ts`
+- **Change theme colors:** `src/index.css` (CSS variables)
+
+See [copilot-instructions.md](./copilot-instructions.md) for detailed development patterns and Phase 1/2 feature checklist.
+
+## Building & Deployment
 
 ```bash
-cat service-account.json | base64 | pbcopy
-# Paste into GOOGLE_SERVICE_ACCOUNT in your host's env var UI
+npm run build     # Creates dist/ folder
+npm run preview   # Test production build locally
 ```
 
-When both Google Sheets and SendGrid are configured, the endpoint will try to append the row to the sheet first and then send the notification email.
-
+Works on **Vercel** (recommended), **Netlify**, or any Node.js host. API routes expect `api/send-contact.js` or similar serverless function.

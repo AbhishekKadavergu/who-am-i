@@ -1,7 +1,7 @@
 {
   "name": "abhishek_kadavergu_portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
     "dotenv": "^16.3.1",
+    "framer-motion": "^12.24.12",
     "googleapis": "^131.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
