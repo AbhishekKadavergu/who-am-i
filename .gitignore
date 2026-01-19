@@ -27,3 +27,5 @@ dist-ssr
 public/*.docx
 src/data/raw/
 scripts/*
+TODO.md
+copilot-instructions.md
