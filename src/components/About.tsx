@@ -164,13 +164,13 @@ const About: React.FC = () => (
 
     {/* Skills */}
     <motion.div
-      className="w-full py-10 px-6 bg-gradient-to-r from-white to-yellow-50 dark:from-gray-900/50 dark:to-gray-900/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl mt-4"
+      className="w-full dark:from-gray-900/50 dark:to-gray-900/80 dark:border-gray-700 "
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.4 }}
       viewport={{ once: true }}
     >
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-yellow-400">
+      <h1 className="text-3xl font-bold text-center mb-6 heading-lg text-gray-900 dark:text-white">
         Skills
       </h1>
 
