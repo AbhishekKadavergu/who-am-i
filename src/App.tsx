@@ -7,6 +7,7 @@ import Contact from "./components/Contact";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./index.css";
 import ThemeProvider from "./context/ThemeProvider";
+import Skills from "./components/Skills";
 
 function App() {
   // keep the initial mount gating to avoid flash of uninitialized UI
@@ -30,6 +31,7 @@ function App() {
           <Header />
           <main id="main">
             <About />
+            <Skills />
             <Projects />
             <Contact />
           </main>

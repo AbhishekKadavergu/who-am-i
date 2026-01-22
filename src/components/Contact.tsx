@@ -7,6 +7,27 @@ import {
 import Toast from "./Toast";
 import { UI_CONSTANTS } from "../constants/ui";
 
+const SOCIALS = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/abhishek-kadavergu/",
+    description: "Professional background & experience",
+    icon: "🔗",
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/AbhishekKadavergu/",
+    description: "Code, systems, and side projects",
+    icon: "💻",
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/abhishek_kadavergu/",
+    description: "Life beyond code",
+    icon: "📸",
+  },
+];
+
 const Contact: React.FC = () => {
   const [form, setForm] = useState<ContactFormType>({
     name: "",
@@ -22,11 +43,10 @@ const Contact: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    const key = name as keyof ContactFormType;
-    setForm((prev) => ({ ...prev, [key]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,10 +69,7 @@ const Contact: React.FC = () => {
       });
 
       if (!res.ok) {
-        const text = await res
-          .text()
-          .catch(() => res.statusText || "Failed to send message");
-        throw new Error(text || "Failed to send message");
+        throw new Error("Failed to send message");
       }
 
       setSubmitted(true);
@@ -60,12 +77,7 @@ const Contact: React.FC = () => {
       setValidationErrors({});
       setShowToast(true);
     } catch (err: unknown) {
-      console.error("Contact send error", err);
-      const message =
-        err instanceof Error
-          ? err.message
-          : String(err ?? "Failed to send message");
-      setError(message);
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -73,25 +85,99 @@ const Contact: React.FC = () => {
 
   const isFormValid = useMemo(
     () => Object.keys(validateContactForm(form)).length === 0,
-    [form]
+    [form],
   );
 
   return (
     <section
       id="contact"
-      className="py-16 px-4 md:px-12 bg-[var(--brand-bg)] transition-colors duration-500"
+      className="
+    py-20 px-4 md:px-12
+    relative
+    bg-[var(--brand-bg)]
+  "
     >
-      <div className="max-w-4xl mx-auto">
+      {/* soft backdrop */}
+      <div
+        className="
+      absolute inset-0
+      bg-gradient-to-b
+      from-transparent
+      via-white/[0.03]
+      to-transparent
+      pointer-events-none
+    "
+      />
+
+      <div className="max-w-5xl mx-auto">
+        {/* Heading */}
         <motion.h2
-          className="heading-lg text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          className="
+    heading-lg
+    text-center
+    mb-4
+    text-[var(--brand-text)]
+    font-semibold
+  "
         >
-          Let's Connect
+          Let’s connect.
         </motion.h2>
 
+        <p
+          className="
+  text-center
+  text-base
+  leading-relaxed
+  text-[var(--brand-muted)]
+  max-w-xl
+  mx-auto
+  mb-16
+"
+        >
+          Whether it’s about systems, work opportunities, or just exchanging
+          ideas — feel free to reach out in whatever way feels easiest.
+        </p>
+
+        {/* Social Links */}
+        <div className="flex flex-col sm:flex-row justify-center gap-6 mb-20">
+          {SOCIALS.map((s) => (
+            <a
+              key={s.name}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              className="
+  group
+  flex items-center gap-4
+  rounded-xl
+  px-6 py-5
+  bg-[var(--brand-surface)]
+  border border-white/10
+  transition
+  hover:border-[var(--brand-orange)]
+  hover:shadow-[0_0_0_1px_var(--brand-orange)]
+"
+            >
+              <span className="text-2xl">{s.icon}</span>
+              <div>
+                <div className="font-semibold text-[var(--brand-text)]">
+                  {s.name}
+                </div>
+                <div
+                  className="
+  text-sm
+  text-[var(--brand-muted)]
+  group-hover:text-[var(--brand-text)]
+"
+                >
+                  {s.description}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* Toast */}
         {showToast && (
           <Toast
             message="Thank you! Your message has been sent successfully."
@@ -101,108 +187,89 @@ const Contact: React.FC = () => {
           />
         )}
 
-        {submitted ? (
-          <motion.div
-            className="text-center py-16 space-y-4"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="text-6xl">✓</div>
-            <h3 className="heading-md text-yellow-500">Message Sent!</h3>
-            <p className="text-body text-muted">
-              I'll get back to you as soon as possible.
+        {/* Contact Form */}
+        {!submitted ? (
+          <>
+            <p
+              className="text-center text-sm mb-6 text-[var(--brand-muted)] font-semibold
+"
+            >
+              Prefer a message? This goes straight to my inbox.
             </p>
-          </motion.div>
-        ) : (
-          <motion.form
-            onSubmit={handleSubmit}
-            className="card card-accent max-w-lg mx-auto p-8 space-y-5"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="space-y-2">
-              <label
-                htmlFor="name"
-                className="block text-body-sm font-semibold"
-              >
-                Name
-              </label>
+
+            <motion.form
+              onSubmit={handleSubmit}
+              className="
+  relative
+  max-w-lg mx-auto
+  p-8
+  space-y-5
+  rounded-xl
+  bg-[var(--brand-dark)]
+  border border-white/10
+  shadow-[0_30px_80px_rgba(0,0,0,0.6)]
+"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
               <input
-                id="name"
                 name="name"
-                type="text"
                 placeholder="Your name"
                 value={form.name}
                 onChange={handleChange}
                 className={`form-input ${validationErrors.name ? "error" : ""}`}
-                required
               />
-              {validationErrors.name && (
-                <div className="form-error">{validationErrors.name}</div>
-              )}
-            </div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="email"
-                className="block text-body-sm font-semibold"
-              >
-                Email
-              </label>
               <input
-                id="email"
                 name="email"
                 type="email"
                 placeholder="your.email@example.com"
                 value={form.email}
                 onChange={handleChange}
-                className={`form-input ${validationErrors.email ? "error" : ""}`}
-                required
+                className={`form-input ${
+                  validationErrors.email ? "error" : ""
+                }`}
               />
-              {validationErrors.email && (
-                <div className="form-error">{validationErrors.email}</div>
-              )}
-            </div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="message"
-                className="block text-body-sm font-semibold"
-              >
-                Message
-              </label>
               <textarea
-                id="message"
                 name="message"
                 placeholder="Your message..."
+                rows={5}
                 value={form.message}
                 onChange={handleChange}
-                rows={5}
-                className={`form-textarea ${validationErrors.message ? "error" : ""}`}
-                required
+                className={`form-textarea ${
+                  validationErrors.message ? "error" : ""
+                }`}
               />
-              {validationErrors.message && (
-                <div className="form-error">{validationErrors.message}</div>
-              )}
-            </div>
 
-            {error && (
-              <div className="p-3 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-sm font-medium">
-                {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading || !isFormValid}
-              className="btn btn-primary w-full text-base"
-            >
-              {loading ? "Sending..." : "Send Message"}
-            </button>
-          </motion.form>
+              {error && <div className="form-error text-center">{error}</div>}
+              <button
+                type="submit"
+                disabled={loading || !isFormValid}
+                className="
+    btn btn-primary w-full
+    text-base
+    tracking-wide
+  "
+              >
+                {loading ? "Sending…" : "Send Message"}
+              </button>
+            </motion.form>
+          </>
+        ) : (
+          <motion.div
+            className="text-center py-20"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            <div className="text-5xl mb-4">✓</div>
+            <h3 className="heading-md mb-2">Message sent</h3>
+            <p className="text-muted">
+              I’ll get back to you as soon as possible.
+            </p>
+          </motion.div>
         )}
       </div>
     </section>

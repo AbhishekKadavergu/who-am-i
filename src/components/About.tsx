@@ -1,214 +1,146 @@
 import React from "react";
 import { motion } from "framer-motion";
-import SKILLS from "../data/skills";
+import profileImg from "../assets/Portfolio-Image.jpg";
 
 const About: React.FC = () => (
-  <section
-    id="about"
-    className="py-16 px-4 md:px-12 bg-[var(--brand-bg)] transition-colors duration-500"
-  >
-    <div className="max-w-4xl mx-auto">
-      {/* Hero Section */}
-      <motion.div
-        className="flex flex-col items-center mb-16"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <motion.img
-          src="https://avatars.githubusercontent.com/u/59202659?v=4"
-          alt="Abhishek Kadavergu"
-          className="w-32 h-32 rounded-full shadow-xl border-4 border-[var(--brand-yellow)] mb-6 cursor-pointer"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
-        />
-        <h1 className="text-4xl font-extrabold text-primary mb-2">
-          Abhishek Kadavergu
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 font-medium mb-2">
-          Full-Stack Developer | JavaScript • TypeScript • React • Node • AWS
-        </p>
-        <span className="inline-block bg-primary text-black dark:bg-yellow-400 dark:text-gray-900 px-4 py-1 rounded-full font-semibold shadow-md">
-          Bangalore, India
-        </span>
-      </motion.div>
-    </div>
-
-    {/* Who Am I? */}
+  <section id="about" className="py-20 px-4 md:px-12 bg-[var(--brand-bg)]">
+    {/* Hero */}
     <motion.div
-      className="max-w-2xl mx-auto bg-white dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg p-8 mb-10 text-left"
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-gray-900 dark:text-yellow-400">
-        <span role="img" aria-label="waving hand">
-          👋
-        </span>{" "}
-        Who Am I?
-      </h2>
-      <p className="mb-3 text-lg text-gray-700 dark:text-gray-300">
-        Hi — I’m <span className="font-bold">Abhishek Kadavergu</span>. I build
-        practical software that helps teams move faster and reduces everyday
-        friction. After completing my MCA I worked with Angular at{" "}
-        <span className="font-bold">TCS</span> and later moved into full-stack
-        roles where I design and ship reliable, maintainable systems.
-      </p>
-
-      <p className="mb-3 text-lg text-gray-700 dark:text-gray-300">
-        Today I work at <span className="font-bold">Airbus</span>, contributing
-        to microservices, micro frontends, and cloud-first solutions using
-        Node.js, Angular, React, TypeScript, AWS and PostgreSQL. I focus on
-        clear architecture and reusable tooling — small investments that pay off
-        across teams.
-      </p>
-
-      <blockquote className="border-l-4 border-gray-400 dark:border-yellow-400 pl-4 italic text-gray-700 dark:text-yellow-300 mb-2">
-        “I like building things that are simple, reliable, and useful.”
-      </blockquote>
-    </motion.div>
-
-    {/* What I Do */}
-    <motion.div
-      className="max-w-2xl mx-auto bg-yellow-50 dark:bg-gray-900/50 backdrop-blur-sm border border-yellow-200 dark:border-gray-700 rounded-xl shadow-lg p-8 mb-10 text-left"
-      initial={{ opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.1 }}
-      viewport={{ once: true }}
-    >
-      <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
-        <span role="img" aria-label="laptop">
-          💻
-        </span>{" "}
-        What I Do
-      </h2>
-      <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-gray-300">
-        <li>
-          Build <span className="font-semibold">full-stack applications</span>{" "}
-          with clear, maintainable architecture.
-        </li>
-        <li>Create workflows and automation that improve team efficiency.</li>
-        <li>
-          Design and deploy cloud solutions on{" "}
-          <span className="font-semibold">AWS</span>.
-        </li>
-        <li>
-          Build reusable libraries, shared components, and standards for large
-          teams.
-        </li>
-        <li>
-          Tools I use: <span className="font-bold">Node.js</span>,{" "}
-          <span className="font-bold">React</span>,{" "}
-          <span className="font-bold">Angular</span>,{" "}
-          <span className="font-bold">TypeScript</span>.
-        </li>
-        <li>Currently improving on system design, cloud patterns, and DSA.</li>
-      </ul>
-    </motion.div>
-
-    {/* Beyond the Resume */}
-    <motion.div
-      className="max-w-2xl mx-auto bg-blue-50 dark:bg-gray-900/50 backdrop-blur-sm border border-blue-200 dark:border-blue-700 rounded-xl shadow-lg p-8 mb-10 text-left"
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      viewport={{ once: true }}
-    >
-      <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-blue-700 dark:text-blue-300">
-        <span role="img" aria-label="seedling">
-          🌱
-        </span>{" "}
-        Beyond the Resume
-      </h2>
-      <p className="mb-2 text-gray-800 dark:text-gray-300">
-        I focus on routines that keep me effective and curious:
-      </p>
-      <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-gray-300">
-        <li>Mentoring new developers and sharing practical learnings.</li>
-        <li>Staying active — gym, badminton, and cricket.</li>
-        <li>
-          Exploring architecture, cloud patterns, and algorithms in my free
-          time.
-        </li>
-      </ul>
-      <blockquote className="border-l-4 border-blue-400 dark:border-blue-700 pl-4 italic text-blue-700 dark:text-blue-200">
-        “Consistency outside work helps me stay consistent inside work.”
-      </blockquote>
-    </motion.div>
-
-    {/* Why This Site? */}
-    <motion.div
-      className="max-w-2xl mx-auto bg-green-50 dark:bg-gray-900/50 backdrop-blur-sm border border-green-200 dark:border-green-700 rounded-xl shadow-lg p-8 text-left mb-12"
-      initial={{ opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.3 }}
-      viewport={{ once: true }}
-    >
-      <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-green-700 dark:text-green-300">
-        <span role="img" aria-label="rocket">
-          🚀
-        </span>{" "}
-        Why This Site?
-      </h2>
-      <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-gray-300">
-        <li>Show practical project work and the thinking behind it.</li>
-        <li>Share skills and patterns I use to build reliable systems.</li>
-        <li>Offer a straightforward view of who I am and how I work.</li>
-      </ul>
-      <p className="text-green-700 dark:text-green-200 font-semibold">
-        If my approach resonates, I’d be glad to connect and collaborate.
-      </p>
-    </motion.div>
-
-    {/* Skills */}
-    <motion.div
-      className="w-full dark:from-gray-900/50 dark:to-gray-900/80 dark:border-gray-700 "
-      initial={{ opacity: 0, y: 30 }}
+      className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-32"
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       viewport={{ once: true }}
     >
-      <h1 className="text-3xl font-bold text-center mb-6 heading-lg text-gray-900 dark:text-white">
-        Skills
-      </h1>
+      {/* Image */}
+      <div className="relative">
+        <motion.img
+          src={profileImg}
+          alt="Abhishek Kadavergu"
+          className="
+            w-full max-w-lg
+            rounded-[2rem]
+            object-cover
+            shadow-[0_30px_80px_rgba(0,0,0,0.6)]
+          "
+          whileHover={{ scale: 1.015 }}
+          transition={{ duration: 0.4 }}
+        />
+        <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+      </div>
 
-      <div className="skills-marquee-viewport">
-        <div className="skills-marquee-track">
-          {/* original row */}
-          {SKILLS.map((skill) => (
-            <div key={skill.name} className="skill-pill">
-              <div className="skill-pill-icon">
-                <img
-                  src={skill.icon}
-                  alt={skill.name}
-                  width={28}
-                  height={28}
-                  className="object-contain"
-                />
-              </div>
-              <span className="skill-pill-label">{skill.name}</span>
-            </div>
-          ))}
+      {/* Intro */}
+      <div className="max-w-xl">
+        <p className="text-lg leading-relaxed mb-6 text-[var(--brand-text)]">
+          Hi — I’m{" "}
+          <span className="font-semibold text-white">Abhishek Kadavergu</span>.
+          I’m a software engineer who enjoys thinking beyond features — about
+          how systems behave under load, change over time, and hold up in the
+          real world.
+        </p>
 
-          {/* duplicate row for seamless looping – not visually jarring, just continuity */}
-          {SKILLS.map((skill) => (
-            <div
-              key={`${skill.name}-dup`}
-              className="skill-pill"
-              aria-hidden="true"
-            >
-              <div className="skill-pill-icon">
-                <img
-                  src={skill.icon}
-                  alt=""
-                  width={28}
-                  height={28}
-                  className="object-contain"
+        <p className="text-lg leading-relaxed mb-6 text-[var(--brand-muted)]">
+          I currently work at{" "}
+          <span className="font-semibold text-white">Airbus</span>, building
+          backend services and micro-frontends using Node.js, Angular, React,
+          TypeScript, AWS, and PostgreSQL. I care deeply about clear
+          architecture, sensible trade-offs, and building software that’s easy
+          to reason about.
+        </p>
+
+        <blockquote className="border-l-2 border-[var(--brand-orange)] pl-5 italic text-[var(--brand-muted)]">
+          I’m less interested in shipping fast — and more interested in building
+          things that last.
+        </blockquote>
+      </div>
+    </motion.div>
+
+    {/* Perspective */}
+    <motion.div
+      className="relative max-w-4xl mx-auto"
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-[72px_1fr] gap-12">
+        {/* Vertical spine */}
+        <div className="hidden md:flex justify-center">
+          <div className="w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+        </div>
+
+        <div>
+          {/* Intro */}
+          <p className="text-xs uppercase tracking-wider text-[var(--brand-muted)] mb-16">
+            How I think, what I care about, and how I grow
+          </p>
+
+          {/* Block helper */}
+          {[
+            {
+              title: "Building systems that hold up under pressure",
+              lead: (
+                <>
+                  I’m less interested in writing code and more interested in
+                  understanding{" "}
+                  <span className="font-semibold text-white">
+                    why systems behave the way they do at scale.
+                  </span>
+                </>
+              ),
+              body: `I enjoy breaking down large products like Uber, Amazon, Netflix,
+              Razorpay, PhonePe, and Google Pay — looking at how they handle
+              traffic, failures, growth, and trade-offs. This curiosity pulled
+              me toward system design, backend architecture, and building
+              things meant to last.`,
+            },
+            {
+              title: "Curious beyond the codebase",
+              lead: (
+                <>
+                  I don’t chase hustle. I care about{" "}
+                  <span className="font-semibold text-white">consistency.</span>
+                </>
+              ),
+              body: `I stay active with badminton, table tennis, and regular workouts,
+              and I enjoy watching cricket. I admire Kohli, Rohit, Dhoni, and
+              Sachin — not just for skill, but for discipline, mindset, and
+              longevity. Wildlife and nature documentaries remind me that
+              systems exist everywhere — balance and sustainability matter.`,
+            },
+            {
+              title: "Growing with intention",
+              lead: `I try to design my life the same way I design systems — by shaping
+              the environment instead of relying on motivation.`,
+              body: `I build small systems that reduce friction: keeping gym
+              clothes ready, removing distractions, and making learning
+              material easy to reach. These decisions compound quietly. I
+              apply the same thinking to my work — improving system design,
+              practicing problem solving, and building routines for long-term
+              growth. I value teams that ask why, not just how.`,
+            },
+          ].map((block, i) => (
+            <div key={block.title} className={i !== 0 ? "mt-24" : ""}>
+              <h3 className="group relative inline-block text-2xl font-semibold mb-4 text-[var(--brand-text)]">
+                {block.title}
+                <span
+                  className="
+        absolute left-0 -bottom-1
+        h-[2px] w-0
+        bg-[var(--brand-orange)]
+        transition-all duration-300
+        group-hover:w-full
+      "
                 />
-              </div>
-              <span className="skill-pill-label">{skill.name}</span>
+              </h3>
+
+              <p className="text-xl mb-4 text-[var(--brand-text)]">
+                {block.lead}
+              </p>
+
+              <p className="text-lg leading-relaxed text-[var(--brand-muted)]">
+                {block.body}
+              </p>
             </div>
           ))}
         </div>

@@ -136,7 +136,7 @@ const projects: Project[] = [
     repo: null,
     demo: null,
     images: ["/projects/clinical-ops-portal.svg"],
-    featured: true,
+    featured: false,
     highlights: [
       "Improved workflow efficiency by ~30%",
       "Reduced scheduling errors significantly",
@@ -156,7 +156,7 @@ const projects: Project[] = [
     repo: null,
     demo: null,
     images: ["/projects/sprintpulse.svg"],
-    featured: false,
+    featured: true,
     highlights: [
       "Adopted by 10+ teams",
       "Eliminated licensed tool dependency",
@@ -184,7 +184,7 @@ const projects: Project[] = [
     repo: "https://github.com/AbhishekKadavergu/who-am-i",
     demo: "https://who-am-i-zeta.vercel.app/",
     images: ["/projects/portfolio-2025.svg"],
-    featured: true,
+    featured: false,
     highlights: [
       "Dynamic project filtering & full-text search",
       "Featured carousel with navigation controls",
