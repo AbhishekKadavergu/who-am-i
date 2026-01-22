@@ -1,55 +1,69 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const STORAGE_KEY = "hideProgressBanner";
+
 const ProgressBanner: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(
+    () => localStorage.getItem(STORAGE_KEY) !== "true",
+  );
+
+  const dismiss = () => {
+    localStorage.setItem(STORAGE_KEY, "true");
+    setIsVisible(false);
+  };
 
   if (!isVisible) return null;
 
   return (
     <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-        >
-          <div className="mx-auto px-3 py-3">
-            <div className="flex items-center">
-              {/* Left-aligned message */}
-              <div className="flex items-start gap-3 text-left">
-                <span className="text-xl leading-none mt-0.5">🚧</span>
-                <p className="text-sm md:text-base font-medium leading-snug">
-                  This portfolio is actively evolving. Sections are being
-                  shipped incrementally.
-                </p>
-              </div>
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        className="
+          w-full
+          bg-[#0B0F14]
+          border-b border-white/5
+          relative
+        "
+      >
+        {/* top accent */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#FF9F1C]" />
 
-              {/* Right-aligned close button */}
-              <button
-                onClick={() => setIsVisible(false)}
-                className="ml-auto flex-shrink-0 rounded-md p-1.5 hover:bg-white/20 transition-colors"
-                aria-label="Dismiss banner"
-                title="Dismiss"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
+        <div className="max-w-7xl mx-auto px-4 md:px-12 py-2.5">
+          <div className="flex items-center gap-4">
+            {/* Message */}
+            <div className="flex items-start gap-3 text-left">
+              <span className="text-base leading-none opacity-90">🚧</span>
+
+              <p className="text-sm text-gray-300 leading-snug">
+                This portfolio is actively evolving.
+                <span className="text-gray-400">
+                  {" "}
+                  Sections are shipped incrementally.
+                </span>
+              </p>
             </div>
+
+            {/* Dismiss */}
+            <button
+              onClick={dismiss}
+              className="
+                ml-auto
+                text-sm
+                text-gray-400
+                hover:text-[#FF9F1C]
+                transition-colors
+              "
+              aria-label="Dismiss banner"
+            >
+              Dismiss
+            </button>
           </div>
-        </motion.div>
-      )}
+        </div>
+      </motion.div>
     </AnimatePresence>
   );
 };

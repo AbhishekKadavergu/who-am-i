@@ -1,62 +1,92 @@
 import React from "react";
 import { motion } from "framer-motion";
-import useTheme from "../hooks/useTheme";
 
 const Header: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
   return (
     <motion.header
-      className="flex justify-between items-center py-6 px-4 md:px-12 bg-[var(--brand-bg)] transition-colors duration-400 border-b border-gray-200 dark:border-gray-800"
-      initial={{ opacity: 0, y: -20 }}
+      className="
+        sticky top-0 z-50
+        bg-[var(--brand-bg)]/80 backdrop-blur
+        border-b border-white/5
+      "
+      initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
     >
-      <motion.h1
-        className="heading-lg text-gray-900 dark:text-white"
-        whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.2 }}
-      >
-        <span className="inline-block mr-3">Abhishek Kadavergu</span>
-        <span className="text-sm px-3 py-1 rounded-full bg-[var(--brand-yellow)] text-[var(--brand-black)] font-semibold">
-          Portfolio
-        </span>
-      </motion.h1>
-
-      <motion.nav
-        className="flex items-center gap-6"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        <a
+      <div className="mx-auto px-4 md:px-12 py-4 flex items-center justify-between">
+        {/* Identity */}
+        <motion.a
           href="#about"
-          className="text-body-sm font-medium cursor-pointer hover:text-[var(--brand-yellow)] transition-colors duration-200"
+          className="
+            group relative
+            text-lg md:text-xl
+            font-semibold
+            tracking-tight
+            text-[var(--brand-text)]
+            cursor-pointer
+          "
+          whileHover={{ y: -1 }}
+          transition={{ duration: 0.2 }}
         >
-          About
-        </a>
-        <a
-          href="#projects"
-          className="text-body-sm font-medium cursor-pointer hover:text-[var(--brand-yellow)] transition-colors duration-200"
-        >
-          Projects
-        </a>
-        <a
-          href="#contact"
-          className="text-body-sm font-medium cursor-pointer hover:text-[var(--brand-yellow)] transition-colors duration-200"
-        >
-          Contact
-        </a>
+          <span className="relative z-10">Abhishek Kadavergu</span>
 
-        <button
-          onClick={toggleTheme}
-          className="btn btn-secondary text-lg"
-          aria-label={
-            theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
-          }
-        >
-          <span aria-hidden="true">{theme === "dark" ? "🌙" : "☀️"}</span>
-        </button>
-      </motion.nav>
+          {/* underline accent */}
+          <span
+            className="
+              absolute left-0 -bottom-1
+              h-[2px] w-0
+              bg-[var(--brand-orange)]
+              transition-all duration-300
+              group-hover:w-full
+            "
+          />
+
+          {/* soft glow */}
+          <span
+            className="
+              absolute left-0 -bottom-1
+              h-[2px] w-0
+              bg-[var(--brand-orange)]
+              blur-sm opacity-40
+              transition-all duration-300
+              group-hover:w-full
+            "
+          />
+        </motion.a>
+
+        {/* Navigation */}
+        <nav className="flex items-center gap-8">
+          {[
+            { label: "About", href: "#about" },
+            { label: "Projects", href: "#projects" },
+            { label: "Contact", href: "#contact" },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="
+                group relative
+                text-sm
+                font-medium
+                text-[var(--brand-muted)]
+                transition-colors
+                hover:text-[var(--brand-text)]
+              "
+            >
+              {item.label}
+              <span
+                className="
+                  absolute left-0 -bottom-1
+                  h-[2px] w-0
+                  bg-[var(--brand-orange)]
+                  transition-all duration-200
+                  group-hover:w-full
+                "
+              />
+            </a>
+          ))}
+        </nav>
+      </div>
     </motion.header>
   );
 };
