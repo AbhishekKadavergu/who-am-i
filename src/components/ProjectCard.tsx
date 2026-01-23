@@ -130,7 +130,7 @@ shadow-inner
                 e.stopPropagation();
                 onOpen(project);
               }}
-              className="text-link"
+              className="text-link cursor-pointer"
             >
               Read more
             </button>
@@ -151,6 +151,7 @@ shadow-inner
   text-[var(--brand-orange)]
   transition-transform
   hover:translate-x-1
+  cursor-pointer
 "
           >
             View system overview →

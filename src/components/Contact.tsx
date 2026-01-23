@@ -34,51 +34,86 @@ const Contact: React.FC = () => {
     email: "",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<
     Record<string, string>
   >({});
   const [showToast, setShowToast] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    const updated = { ...form, [name]: value };
+    setForm(updated);
+    setValidationErrors(validateContactForm(updated));
   };
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+  };
+
+  const shouldShowError = (field: keyof ContactFormType) =>
+    touched[field] && validationErrors[field];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // 1. Validate
+    const errors = validateContactForm(form);
+    setValidationErrors(errors);
+
+    setTouched({
+      name: true,
+      email: true,
+      message: true,
+    });
+
+    if (Object.keys(errors).length > 0) return;
+
+    // 2. Submit
     setLoading(true);
     setError(null);
 
-    const errors = validateContactForm(form);
-    setValidationErrors(errors);
-    if (Object.keys(errors).length > 0) {
-      setLoading(false);
-      return;
-    }
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     try {
-      const res = await fetch("/api/send-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      // 🔹 enable when backend is ready
+      // const res = await fetch("/api/send-contact", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(form),
+      //   signal: controller.signal,
+      // });
 
-      if (!res.ok) {
-        throw new Error("Failed to send message");
-      }
+      // if (!res.ok) {
+      //   throw new Error("Failed to send message. Please try again.");
+      // }
 
-      setSubmitted(true);
+      // 3. Success
       setForm({ name: "", email: "", message: "" });
       setValidationErrors({});
+      setTouched({});
       setShowToast(true);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      if (err instanceof DOMException && err.name === "AbortError") {
+        setError("Request timed out. Please check your connection.");
+      } else {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Something went wrong. Please try again.",
+        );
+      }
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   };
@@ -188,7 +223,7 @@ const Contact: React.FC = () => {
         )}
 
         {/* Contact Form */}
-        {!submitted ? (
+        {
           <>
             <p
               className="text-center text-sm mb-6 text-[var(--brand-muted)] font-semibold
@@ -214,13 +249,40 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
+              {loading && (
+                <div
+                  className="
+      absolute inset-0 z-10
+      flex items-center justify-center
+      rounded-xl
+      bg-black/40
+      backdrop-blur-sm
+    "
+                >
+                  <div className="flex items-center gap-3 text-sm text-[var(--brand-text)]">
+                    <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-[var(--brand-orange)] animate-spin" />
+                    Sending your message…
+                  </div>
+                </div>
+              )}
+
               <input
                 name="name"
                 placeholder="Your name"
                 value={form.name}
                 onChange={handleChange}
-                className={`form-input ${validationErrors.name ? "error" : ""}`}
+                onBlur={handleBlur}
+                className={`form-input ${
+                  shouldShowError("name") ? "error" : ""
+                }`}
+                disabled={loading}
               />
+
+              {shouldShowError("name") && (
+                <p className="mt-1 text-sm text-red-400">
+                  {validationErrors.name}
+                </p>
+              )}
 
               <input
                 name="email"
@@ -228,21 +290,37 @@ const Contact: React.FC = () => {
                 placeholder="your.email@example.com"
                 value={form.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 className={`form-input ${
-                  validationErrors.email ? "error" : ""
+                  shouldShowError("email") ? "error" : ""
                 }`}
+                disabled={loading}
               />
+
+              {shouldShowError("email") && (
+                <p className="mt-1 text-sm text-red-400">
+                  {validationErrors.email}
+                </p>
+              )}
 
               <textarea
                 name="message"
-                placeholder="Your message..."
                 rows={5}
+                placeholder="Your message..."
                 value={form.message}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 className={`form-textarea ${
-                  validationErrors.message ? "error" : ""
+                  shouldShowError("message") ? "error" : ""
                 }`}
+                disabled={loading}
               />
+
+              {shouldShowError("message") && (
+                <p className="mt-1 text-sm text-red-400">
+                  {validationErrors.message}
+                </p>
+              )}
 
               {error && <div className="form-error text-center">{error}</div>}
               <button
@@ -258,19 +336,7 @@ const Contact: React.FC = () => {
               </button>
             </motion.form>
           </>
-        ) : (
-          <motion.div
-            className="text-center py-20"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-          >
-            <div className="text-5xl mb-4">✓</div>
-            <h3 className="heading-md mb-2">Message sent</h3>
-            <p className="text-muted">
-              I’ll get back to you as soon as possible.
-            </p>
-          </motion.div>
-        )}
+        }
       </div>
     </section>
   );
