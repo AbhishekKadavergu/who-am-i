@@ -1,0 +1,11 @@
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: rgba(255, 159, 28, 0.12);
+  border: 1px solid rgba(255, 159, 28, 0.3);
+  color: var(--brand-text);
+}
+.badge:hover {
+  background: rgba(255, 159, 28, 0.2);
+}

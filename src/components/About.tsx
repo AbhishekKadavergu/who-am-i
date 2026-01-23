@@ -34,9 +34,9 @@ const About: React.FC = () => (
         <p className="text-lg leading-relaxed mb-6 text-[var(--brand-text)]">
           Hi — I’m{" "}
           <span className="font-semibold text-white">Abhishek Kadavergu</span>.
-          I’m a software engineer who enjoys looking beyond features — spending
-          time understanding how things behave, evolve, and hold up once they’re
-          out in the real world.
+          I’m a software engineer who enjoys looking beyond features. I like
+          spending time understanding how things behave, evolve, and hold up
+          once they’re out in the real world.
         </p>
 
         <p className="text-lg leading-relaxed mb-6 text-[var(--brand-muted)]">
@@ -89,7 +89,7 @@ const About: React.FC = () => (
             </h3>
 
             <p className="text-lg leading-relaxed text-[var(--brand-muted)]">
-              I’m drawn to understanding why systems behave the way they do —
+              I’m drawn to understanding why systems behave the way they do,
               especially when they grow, slow down, or fail in unexpected ways.
               That curiosity naturally pulled me toward backend work, system
               design, and thinking about trade-offs rather than perfect answers.
@@ -116,15 +116,14 @@ const About: React.FC = () => (
             <p className="text-lg leading-relaxed text-[var(--brand-muted)]">
               Outside of work, I stay active with badminton, table tennis, and
               regular workouts, and I enjoy watching cricket. Sports have been a
-              quiet teacher — consistency, discipline, and showing up matter
-              more than short bursts of intensity.
+              quiet teacher for me. Consistency, discipline, and simply showing
+              up matter more than short bursts of intensity.
             </p>
 
             <p className="text-lg leading-relaxed text-[var(--brand-muted)] mt-4">
               I also enjoy watching wildlife and nature documentaries. It’s
-              something I find calming, and over time it’s shaped how I think
-              about patience, balance, and long-term impact — without being loud
-              about it.
+              something I find calming. Over time, it’s shaped how I think about
+              patience, balance, and long-term impact, in a very quiet way.
             </p>
           </div>
 
@@ -147,16 +146,16 @@ const About: React.FC = () => (
 
             <p className="text-lg leading-relaxed text-[var(--brand-muted)]">
               Over time, I’ve learned to rely less on motivation and more on
-              small systems — simple habits, reduced friction, and environments
+              small systems. Simple habits, reduced friction, and environments
               that make good choices easier. Whether it’s keeping gym clothes
               ready the night before, staying mindful about health, or being
               conscious of long-term impact, these things add up quietly.
             </p>
 
             <p className="text-lg leading-relaxed text-[var(--brand-muted)] mt-4">
-              I try to carry the same mindset into my work — improving a little,
-              staying curious, and building in a way that’s thoughtful rather
-              than rushed.
+              I try to carry the same mindset into my work. I focus on improving
+              a little at a time, staying curious, and building things
+              thoughtfully instead of rushing.
             </p>
           </div>
         </div>

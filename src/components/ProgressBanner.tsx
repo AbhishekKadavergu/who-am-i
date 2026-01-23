@@ -32,7 +32,7 @@ const ProgressBanner: React.FC = () => {
         {/* top accent */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#FF9F1C]" />
 
-        <div className="max-w-7xl mx-auto px-4 md:px-12 py-2.5">
+        <div className="mx-auto px-4 md:px-12 py-2.5">
           <div className="flex items-center gap-4">
             {/* Message */}
             <div className="flex items-start gap-3 text-left">
@@ -52,14 +52,11 @@ const ProgressBanner: React.FC = () => {
               onClick={dismiss}
               className="
                 ml-auto
-                text-sm
-                text-gray-400
-                hover:text-[#FF9F1C]
-                transition-colors
+                btn btn-icon
               "
               aria-label="Dismiss banner"
             >
-              Dismiss
+              ✕
             </button>
           </div>
         </div>

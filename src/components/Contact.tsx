@@ -86,16 +86,16 @@ const Contact: React.FC = () => {
 
     try {
       // 🔹 enable when backend is ready
-      const res = await fetch("/api/send-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-        signal: controller.signal,
-      });
+      // const res = await fetch("/api/send-contact", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(form),
+      //   signal: controller.signal,
+      // });
 
-      if (!res.ok) {
-        throw new Error("Failed to send message. Please try again.");
-      }
+      // if (!res.ok) {
+      //   throw new Error("Failed to send message. Please try again.");
+      // }
 
       // 3. Success
       setForm({ name: "", email: "", message: "" });
@@ -186,11 +186,15 @@ const Contact: React.FC = () => {
   flex items-center gap-4
   rounded-xl
   px-6 py-5
+
   bg-[var(--brand-surface)]
   border border-white/10
-  transition
-  hover:border-[var(--brand-orange)]
-  hover:shadow-[0_0_0_1px_var(--brand-orange)]
+
+  transition-all duration-300 ease-out
+
+  hover:-translate-y-[2px]
+  hover:border-[var(--brand-orange)]/30
+  hover:shadow-[0_18px_40px_rgba(0,0,0,0.55)]
 "
             >
               <span className="text-2xl">{s.icon}</span>
