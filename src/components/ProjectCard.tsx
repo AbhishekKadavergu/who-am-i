@@ -130,7 +130,7 @@ shadow-inner
                 e.stopPropagation();
                 onOpen(project);
               }}
-              className="text-link cursor-pointer"
+              className="btn btn-ghost text-sm"
             >
               Read more
             </button>

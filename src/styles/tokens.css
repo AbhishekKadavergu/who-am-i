@@ -1,0 +1,15 @@
+/* =========================
+   THEME TOKENS (DARK ONLY)
+   ========================= */
+:root {
+  --brand-orange: #FF9F1C;
+  --brand-orange-glow: rgba(255, 159, 28, 0.35);
+
+  --brand-black: #0B0F14;
+  --brand-dark: #0E141B;
+  --brand-surface: rgba(255, 255, 255, 0.04);
+
+  --brand-text: #E5E7EB;     /* gray-200 */
+  --brand-muted: #9CA3AF;   /* gray-400 */
+  --brand-bg: var(--brand-black);
+}

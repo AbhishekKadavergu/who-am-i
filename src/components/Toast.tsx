@@ -58,12 +58,12 @@ export const Toast: React.FC<ToastProps> = ({
   `}
       style={{ zIndex: UI_CONSTANTS.TOAST_Z_INDEX }}
     >
-      <span className="font-bold text-lg">{icon}</span>
+      <span className="font-bold text-lg mr-2">{icon}</span>
       <span className="flex-1 text-sm font-medium">{message}</span>
       <button
         onClick={() => setIsVisible(false)}
-        className="text-white hover:opacity-75 transition-opacity"
         aria-label="Close notification"
+        className="btn btn-icon"
       >
         ✕
       </button>

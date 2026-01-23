@@ -1,0 +1,14 @@
+/* =========================
+   GLOBAL BASELINE
+   ========================= */
+body {
+  background: var(--brand-bg);
+  color: var(--brand-text);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 159, 28, 0.35);
+  border-radius: 8px;
+}
