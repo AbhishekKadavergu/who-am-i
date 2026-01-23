@@ -1,0 +1,138 @@
+/* ===========================
+   Skills marquee / skill pills
+   =========================== */
+/* marquee vars (can be tuned) */
+/* ===========================
+   SKILLS MARQUEE — DARK ONLY
+   =========================== */
+
+:root {
+  --skill-pill-width: 160px;
+  --skill-pill-height: 56px;
+  --skill-pill-gap: 1rem;
+  --skill-icon-size: 44px;
+  --skill-icon-img: 28px;
+  --marquee-duration: 20s;
+}
+
+/* viewport + track */
+.skills-marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.skills-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--skill-pill-gap);
+  width: max-content;
+  animation: skills-marquee var(--marquee-duration) linear infinite;
+  will-change: transform;
+  margin: 1rem;
+}
+
+/* pill */
+.skill-pill {
+  position: relative;
+  width: var(--skill-pill-width);
+  height: var(--skill-pill-height);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+  color: var(--brand-text);
+
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  overflow: hidden;
+}
+
+/* hover */
+.skill-pill:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 22px 56px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 159, 28, 0.25);
+}
+
+/* subtle orange glow layer */
+.skill-pill-glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 159, 28, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.skill-pill:hover .skill-pill-glow {
+  opacity: 1;
+}
+
+/* icon bubble */
+.skill-pill-icon {
+  width: var(--skill-icon-size);
+  height: var(--skill-icon-size);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 159, 28, 0.18)
+  );
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* icon image */
+.skill-pill-icon img {
+  width: var(--skill-icon-img);
+  height: var(--skill-icon-img);
+  object-fit: contain;
+}
+
+/* label */
+.skill-pill-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--brand-text);
+}
+
+/* =========================
+   SKILLS MARQUEE (unchanged logic)
+   ========================= */
+.skills-marquee-viewport {
+  overflow: hidden;
+}
+.skills-marquee-track {
+  display: inline-flex;
+  gap: 1rem;
+  animation: skills-marquee 20s linear infinite;
+}
+@keyframes skills-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* animation */
+@keyframes skills-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* pause on hover */
+.skills-marquee-viewport:hover .skills-marquee-track {
+  animation-play-state: paused;
+}

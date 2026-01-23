@@ -1,5 +1,11 @@
 # Changelog
 
+## Enhancement
+
+### 0.0.3
+
+- Improved content, separated css styles
+
 ## Feature
 
 ### 0.0.2
