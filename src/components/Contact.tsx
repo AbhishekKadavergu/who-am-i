@@ -86,16 +86,16 @@ const Contact: React.FC = () => {
 
     try {
       // 🔹 enable when backend is ready
-      // const res = await fetch("/api/send-contact", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(form),
-      //   signal: controller.signal,
-      // });
+      const res = await fetch("/api/send-contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+        signal: controller.signal,
+      });
 
-      // if (!res.ok) {
-      //   throw new Error("Failed to send message. Please try again.");
-      // }
+      if (!res.ok) {
+        throw new Error("Failed to send message. Please try again.");
+      }
 
       // 3. Success
       setForm({ name: "", email: "", message: "" });
