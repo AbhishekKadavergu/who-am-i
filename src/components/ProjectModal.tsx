@@ -63,8 +63,27 @@ export default function ProjectModal({ project, onClose }: Props) {
 
             <button
               onClick={onClose}
-              className="text-xl opacity-70 hover:opacity-100"
-              aria-label="Close"
+              aria-label="Close modal"
+              className="
+    cursor-pointer
+    text-xl
+    opacity-70
+    rounded-md
+    p-1.5
+
+    transition-all duration-200 ease-out
+
+    hover:opacity-100
+    hover:text-[var(--brand-orange)]
+    hover:shadow-[0_0_18px_var(--brand-orange-glow)]
+
+    focus-visible:outline-none
+    focus-visible:text-[var(--brand-orange)]
+    focus-visible:ring-2
+    focus-visible:ring-[var(--brand-orange)]
+    focus-visible:ring-offset-2
+    focus-visible:ring-offset-[var(--brand-dark)]
+  "
             >
               ✕
             </button>

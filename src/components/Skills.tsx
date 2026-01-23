@@ -5,29 +5,44 @@ import SKILLS from "../data/skills";
 const Skills: React.FC = () => {
   return (
     <motion.section
-      className="w-full py-24 bg-[var(--brand-bg)]"
+      className="w-full px-4 py-24 bg-[var(--brand-bg)]"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true }}
     >
       {/* Header */}
-      <div className="text-center mb-16">
-        <h2 className="relative inline-block text-3xl md:text-4xl font-semibold tracking-tight text-[var(--brand-text)]">
+      <div className="text-center mb-20">
+        <h2 className="group relative inline-block text-3xl md:text-4xl font-semibold tracking-tight text-[var(--brand-text)]">
           Skills
+          {/* underline */}
           <span
             className="
-              absolute left-1/2 -bottom-3
-              h-[2px] w-12
-              -translate-x-1/2
-              bg-[var(--brand-orange)]
-              rounded-full
-            "
+        absolute left-1/2 -bottom-3
+        h-[2px] w-10
+        -translate-x-1/2
+        bg-[var(--brand-orange)]
+        rounded-full
+        transition-all duration-300
+        group-hover:w-16
+      "
+          />
+          {/* soft glow */}
+          <span
+            className="
+        absolute left-1/2 -bottom-3
+        h-[2px] w-10
+        -translate-x-1/2
+        bg-[var(--brand-orange)]
+        blur-md
+        opacity-30
+        pointer-events-none
+      "
           />
         </h2>
 
-        <p className="mt-6 text-sm text-[var(--brand-muted)]">
-          Technologies I work with regularly
+        <p className="mt-6 text-sm text-[var(--brand-muted)] max-w-md mx-auto">
+          Tools I use to build things.
         </p>
       </div>
 

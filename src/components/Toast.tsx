@@ -29,10 +29,10 @@ export const Toast: React.FC<ToastProps> = ({
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
-  const bgColor = {
-    success: "bg-green-500 dark:bg-green-600",
-    error: "bg-red-500 dark:bg-red-600",
-    info: "bg-blue-500 dark:bg-blue-600",
+  const tone = {
+    success: "border-[var(--brand-orange)]",
+    error: "border-red-500",
+    info: "border-white/20",
   }[type];
 
   const icon = {
@@ -43,13 +43,20 @@ export const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
-      className={`fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm ${bgColor} text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 transition-all duration-300 ${
-        isVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-2 pointer-events-none"
-      }`}
+      className={`
+    fixed bottom-6 right-6
+    max-w-sm
+    bg-black
+    border ${tone}
+    text-white
+    px-4 py-3
+    rounded-lg
+    shadow-[0_0_20px_rgba(255,165,0,0.25)]
+    flex items-center gap-3
+    transition-all duration-300
+    ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}
+  `}
       style={{ zIndex: UI_CONSTANTS.TOAST_Z_INDEX }}
-      role="alert"
     >
       <span className="font-bold text-lg">{icon}</span>
       <span className="flex-1 text-sm font-medium">{message}</span>

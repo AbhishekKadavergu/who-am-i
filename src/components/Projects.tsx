@@ -20,24 +20,36 @@ export default function Projects(): JSX.Element {
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        {/* Header */}
-        <div className="mb-20">
-          <h2 className="relative inline-block text-3xl md:text-4xl font-semibold tracking-tight text-[var(--brand-text)]">
+        <div className="mb-24">
+          <h2 className="group relative inline-block text-3xl md:text-4xl font-semibold tracking-tight text-[var(--brand-text)]">
             Projects
+            {/* underline */}
             <span
               className="
         absolute left-0 -bottom-3
-        h-[2px] w-16
+        h-[2px] w-10
         bg-[var(--brand-orange)]
         rounded-full
+        transition-all duration-300
+        group-hover:w-20
+      "
+            />
+            {/* soft glow */}
+            <span
+              className="
+        absolute left-0 -bottom-3
+        h-[2px] w-40
+        bg-[var(--brand-orange)]
+        blur-md
+        opacity-30
+        pointer-events-none
       "
             />
           </h2>
 
           <p className="mt-8 text-base text-[var(--brand-muted)] max-w-2xl leading-relaxed">
-            A selection of systems I’ve designed and shipped across frontend,
-            and backend — with a focus on clarity, scalability, and long-term
-            maintainability.
+            A few things I’ve worked on — from ideas to systems used in
+            practice.
           </p>
         </div>
 
