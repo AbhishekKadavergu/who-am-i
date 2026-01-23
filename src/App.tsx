@@ -8,6 +8,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import "./index.css";
 import ThemeProvider from "./context/ThemeProvider";
 import Skills from "./components/Skills";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   // keep the initial mount gating to avoid flash of uninitialized UI
@@ -24,6 +25,7 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider>
         <div className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-gray-100 transition-colors duration-500">
+          <Analytics />
           <a href="#main" className="sr-only focus:not-sr-only">
             Skip to content
           </a>
